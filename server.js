@@ -34,6 +34,8 @@ const logController = require('./controllers/login')
 app.use('/', logController);
 const homeController = require('./controllers/home');
 app.use('/home', homeController);
+const spotController = require('./controllers/spots');
+app.use('/myspots', spotController);
 
 
 
