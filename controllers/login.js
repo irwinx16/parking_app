@@ -6,9 +6,59 @@ const bcrypt = require('bcrypt');
 //ROUTE TO LOGIN PAGE
 router.get('/', (req, res) => {
 
-	res.render('login/login.ejs');
+	res.render('login/login.ejs', {
+		message: req.session.message
+	});
 
 });
+
+//ROUTE FOR LOGGING IN
+router.post('/login', async (req, res, next) => {
+
+	try {
+
+		const user = await Users.findOne({username: req.body.username})
+		
+		if(user){
+
+			//compare passwords
+			if(bcrypt.compareSync(req.body.password, user.password)){
+
+				req.session.logged = true;
+				req.session.username = user.username; 
+
+				console.log('----------------------------------------')
+				console.log('USERS MATCH!')
+				console.log('----------------------------------------')
+
+				res.redirect('/home');
+
+			} else {
+
+				req.session.message = 'Username or Password Incorrect. Please Try Again.'
+				console.log('----------------------------------------')
+				console.log('USERNAMES DONT MATCH!')
+				console.log('----------------------------------------')
+				res.redirect('/')
+
+
+			}  
+		//if the user is null or undefined
+		} else {
+		
+			req.session.message = "Username or Password Incorrect. Please Try Again."
+			console.log('----------------------------------------')
+			console.log('USER NULL!')
+			console.log('----------------------------------------')
+			res.redirect('/')
+		}
+
+	} catch (err){
+
+		next (err)
+	}
+
+})
 
 
 
@@ -26,7 +76,17 @@ router.post('/registration', async (req, res) => {
 	try {
 
 		const createdUser = await Users.create(newUser);
-		res.redirect('/home')
+
+		if(createdUser){
+			req.session.logged = true;
+			req.session.username = createdUser.username;
+
+			res.redirect('/home')
+
+		} else {
+			res.redirect('/')
+		}
+		
 
 	} catch (err) {
 
