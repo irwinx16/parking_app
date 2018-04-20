@@ -22,6 +22,7 @@ app.use(session({
 }))
 
 //--------------MIDDLEWARE--------------//
+app.use(express.static('public')) // 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
@@ -30,8 +31,8 @@ app.use(expressLayouts);
 
 
 //--------------CONTROLLERS--------------//
-const logController = require('./controllers/login')
-app.use('/', logController);
+const loginController = require('./controllers/login')
+app.use('/', loginController);
 const homeController = require('./controllers/home');
 app.use('/home', homeController);
 const spotController = require('./controllers/spots');

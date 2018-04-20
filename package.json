@@ -26,6 +26,7 @@
     "method-override": "^2.3.10",
     "mongo": "^0.1.0",
     "mongod": "^2.0.0",
-    "mongoose": "^5.0.15"
+    "mongoose": "^5.0.15",
+    "request": "^2.85.0"
   }
 }
