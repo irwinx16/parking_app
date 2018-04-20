@@ -31,7 +31,7 @@ router.post('/login', async (req, res, next) => {
 				console.log('USERS MATCH!')
 				console.log('----------------------------------------')
 
-				res.redirect('/home');
+				res.redirect('/home')
 
 			} else {
 

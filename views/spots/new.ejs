@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> New Spot</title>
+</head>
+<body>
+	<h1> Add a Spot</h1>
+	<form action='/myspots' method='post'>
+		<select name='userId'>
+			<% for (let i = 0; i < users.length; i++) { -%>
+				<option value='<%= users[i].id%>'><%= users[i].username%></option>
+					<% } -%>
+		</select><br/>
+		<input type='text' name='spotname'></input>
+		<button type='submit'>Add Spot</button>
+	</form>
+</body>
+</html>

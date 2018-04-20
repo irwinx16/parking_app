@@ -1,18 +1,22 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request'); 
+
+
+//GET ROUTE TO HOME PAGE
+router.get('/', (req, res) => {
+
+// 	res.render('home/home.ejs');
 
 // router level middleware
 // router.use((req, res, next)=> {
 // 	//check login here if you like
 // 	console.log("this route will be hit for every route in /home");
 // 	next()
-// })
+})
 
 router.get('/', (req, res) => {
 	res.render('home/home.ejs');
 });
-
 
 router.get('/test', (req, res) => {
 
@@ -22,7 +26,7 @@ router.get('/test', (req, res) => {
 		// be sure it's in this callback and not after it 
 		// because if it's after, it will try to run before the ajax request is finished
 		const zones = JSON.parse(body);
-		//   console.log(zones[0].address_range_low);
+		// console.log(zones[0].address_range_low);
 		// console.log(zones[0].address_range_high);
 		// console.log(zones[0].street_direction);
 		// console.log(zones[0].street_name);
@@ -37,14 +41,10 @@ router.get('/test', (req, res) => {
 	 	res.send(zoneTest)
 
 	});
+	
+	res.render('home/home.ejs');
 
 
 });
-
-
-
-
-
-
 
 module.exports = router;
