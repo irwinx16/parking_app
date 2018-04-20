@@ -52,7 +52,7 @@ function initMap() {
                 zone: data[i].zone
 
           }
-          console.log(addr);
+          // console.log(addr);
             }
 
         });
@@ -63,6 +63,7 @@ function initMap() {
 function geocodeAddress(geocoder, resultsMap) {
     const address = document.getElementById('address').value;
     geocoder.geocode({'address': address}, function(results, status) {
+      console.log(results[0].address_components[0].short_name);
 
 
       if (status === 'OK') {
