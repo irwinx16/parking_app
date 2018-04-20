@@ -1,14 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request'); 
-
-
-// router.get('/', (req, res) => {
 
 
 //GET ROUTE TO HOME PAGE
 router.get('/', (req, res) => {
-
 
 // 	res.render('home/home.ejs');
 
@@ -46,14 +41,10 @@ router.get('/test', (req, res) => {
 	 	res.send(zoneTest)
 
 	});
+	
+	res.render('home/home.ejs');
 
 
 });
-
-
-
-
-
-
 
 module.exports = router;
