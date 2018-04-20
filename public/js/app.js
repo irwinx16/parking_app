@@ -20,6 +20,7 @@ $('a').on('click', (e) => {
 })
 
 function initMap() {
+
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
       center: {lat: 41.8781, lng: -87.6298}
@@ -31,7 +32,17 @@ function initMap() {
     $('#submit').on('click', function() {
       geocodeAddress(geocoder, map);
 
-        $.ajax({
+
+    });
+}
+
+
+function geocodeAddress(geocoder, resultsMap) {
+    const address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      // console.log(results[0].address_components[0].short_name);
+
+            $.ajax({
           url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
           type: "GET",
           data: {
@@ -45,6 +56,7 @@ function initMap() {
             for (let i = 0; i < data.length; i++) {
 
               const addr = {
+                
                 addresRangeHigh: data[i].address_range_high,
                 addresRangeLow: data[i].address_range_low,
                 streetDirection: data[i].street_direction,
@@ -52,18 +64,24 @@ function initMap() {
                 zone: data[i].zone
 
           }
-          // console.log(addr);
+
+
+
+      const addrNumber = results[0].address_components[0].short_name;
+      // console.log(addr.addresRangeHigh);
+      // console.log(addr.addresRangeLow);
+
+      if (addrNumber >= addr.addresRangeLow && addrNumber <= addr.addresRangeHigh) {
+        console.log('it is within number range');
+      } else {
+        console.log('doest work');
             }
 
-        });
-    });
-}
+          
+      }
+          // console.log(addr);
 
-
-function geocodeAddress(geocoder, resultsMap) {
-    const address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-      console.log(results[0].address_components[0].short_name);
+        }); 
 
 
       if (status === 'OK') {
