@@ -3,7 +3,9 @@ const app = express ();
 const bodyParser = require('body-parser');
 const expressLayouts = require('express-ejs-layouts');
 const methodOverride = require("method-override");
+
 const session = require('express-session');
+
 const PORT = 3000;
 
 //--------------DATABASE----------------//
@@ -24,7 +26,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
-app.use(express.static('public'));
 
 
 
