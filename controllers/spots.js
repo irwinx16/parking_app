@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+//ROUTE TO MY SPOTS INDEX
 
-//GET ROUTE TO HOME PAGE
-router.get('/', (req, res) => {
+router.get('/', (req,res) => {
+	
+	res.render('spots/index.ejs');
+})
 
-	res.render('home/home.ejs');
-
-});
 
 module.exports = router;
