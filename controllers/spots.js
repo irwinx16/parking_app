@@ -7,25 +7,36 @@ const Spot = require('../models/spots.js')
 
 router.get('/', async (req,res) => {
 
-	// if(req.session.logged) {
-	// 	try {
-	// 		//await - wait for the db response
-	// 		const theArticlesIFound = await Articles.find();
+	res.render('spots/index.ejs')	
 
-	// 		res.render('spots/index.ejs', {
-	// 			articles: theArticlesIFound,
-	// 			username: req.session.username
-	// 		})
+});
 
-	// 	} catch (err){
 
-	// 		res.send(err);
+//ROUTE TO GET USERS 
 
-	// 	}
-	// } else {
-	// 	req.session.message = "Please Login."
-	// 	res.redirect('/');
-	// }
+router.get('/new', async (req, res) => {
+
+	//get users
+
+	try {
+
+		const allUsers = await User.find({})
+		res.render('spots/new.ejs', {
+			users: allUsers
+		})
+
+	} catch (err) {
+		res.send(err)
+	}
+})
+
+//ROUTE TO ADD SPOT
+
+router.post('/', async (req, res) => {
+
+	res.send('Post Spot')
+
 });
 
 module.exports = router;
+
