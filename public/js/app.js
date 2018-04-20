@@ -47,18 +47,18 @@ function initMap() {
       geocodeAddress(geocoder, map);
 
 
-      $.ajax({
-    url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
-    type: "GET",
-    data: {
-      "$limit" : 5000,
-      "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
-    }
-}).done(function(data) {
-  alert("Retrieved " + data.length + " records from the dataset!");
-  console.log(data);
-});
-    });
+        $.ajax({
+      url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
+      type: "GET",
+      data: {
+        "$limit" : 5000,
+        "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
+      }
+        }).done(function(data) {
+          alert("Retrieved " + data.length + " records from the dataset!");
+          console.log(data);
+        });
+            });
   }
 
 
