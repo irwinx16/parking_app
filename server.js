@@ -1,15 +1,17 @@
 const express = require('express');
 const app = express ();
 const expressLayouts = require('express-ejs-layouts');
+const bodyParser = require('body-parser')
+
 const PORT = 3000;
 
 //--------------DATABASE----------------//
 require('./db/db');
 
 //--------------MIDDLEWARE--------------//
-app.set('view engine', 'ejs');
-app.use(expressLayouts);
 app.use(express.static('public'));
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
 
 
 
