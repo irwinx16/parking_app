@@ -1,6 +1,3 @@
-#map {
-  height: 75%;
-}
 
 html, body {
   height: 100%;
@@ -8,6 +5,13 @@ html, body {
   padding: 0;
 
 }
+
+#map {
+  height: 75%;
+}
+
+
+
 #floating-panel {
   position: absolute;
   top: 10px;
