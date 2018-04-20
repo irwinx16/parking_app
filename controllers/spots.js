@@ -7,25 +7,25 @@ const Spot = require('../models/spots.js')
 
 router.get('/', async (req,res) => {
 
-	if(req.session.logged) {
-		try {
-			//await - wait for the db response
-			const theArticlesIFound = await Articles.find();
+	// if(req.session.logged) {
+	// 	try {
+	// 		//await - wait for the db response
+	// 		const theArticlesIFound = await Articles.find();
 
-			res.render('spots/index.ejs', {
-				articles: theArticlesIFound,
-				username: req.session.username
-			})
+	// 		res.render('spots/index.ejs', {
+	// 			articles: theArticlesIFound,
+	// 			username: req.session.username
+	// 		})
 
-		} catch (err){
+	// 	} catch (err){
 
-			res.send(err);
+	// 		res.send(err);
 
-		}
-	} else {
-		req.session.message = "Please Login."
-		res.redirect('/');
-	}
+	// 	}
+	// } else {
+	// 	req.session.message = "Please Login."
+	// 	res.redirect('/');
+	// }
 });
 
 module.exports = router;
