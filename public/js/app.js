@@ -1,6 +1,6 @@
 
 console.log("Connected");
-
+/**/
 $('a').on('click', (e) => {
 	console.log(e.currentTarget.innerText)
 
@@ -14,7 +14,7 @@ $('a').on('click', (e) => {
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible');
 	} else {
-		console.log('do nothing')
+	 	console.log('do nothing')
 		}
 	}
 })
@@ -31,6 +31,19 @@ function initMap() {
 
     document.getElementById('submit').addEventListener('click', function() {
       geocodeAddress(geocoder, map);
+
+
+      $.ajax({
+    url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
+    type: "GET",
+    data: {
+      "$limit" : 5000,
+      "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
+    }
+}).done(function(data) {
+  alert("Retrieved " + data.length + " records from the dataset!");
+  console.log(data);
+});
     });
   }
 
@@ -56,3 +69,4 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 
+/**/
