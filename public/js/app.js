@@ -20,6 +20,21 @@ $('a').on('click', (e) => {
 })
 
 
+  // $.ajax({
+  //  url: ,
+  //  type: "GET", 
+  //  dataType: "json",
+  //  success: function(data) {
+
+  //  },
+  //  fail: function(error) {
+
+  //  }
+  // })
+
+
+
+
 function initMap() {
     const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 10,
@@ -28,15 +43,15 @@ function initMap() {
     const geocoder = new google.maps.Geocoder();
 
 
-
-    document.getElementById('submit').addEventListener('click', function() {
+    $('#submit').on('click', function() {
       geocodeAddress(geocoder, map);
+
     });
   }
 
 
 function geocodeAddress(geocoder, resultsMap) {
-    const address = document.getElementById('address').value;
+    const address = $('#address').value;
     geocoder.geocode({'address': address}, function(results, status) {
 
       console.log(geocoder)
