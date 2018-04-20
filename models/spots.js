@@ -6,4 +6,4 @@ const spotSchema = new mongoose.Schema({
 });
 
 //Creating the collection --> author will be the name of the collection
-module.exports = mongoose.model('Spots', userSchema);
+module.exports = mongoose.model('Spots', spotSchema);
