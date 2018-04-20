@@ -6,55 +6,57 @@ const bcrypt = require('bcrypt');
 //ROUTE TO LOGIN PAGE
 router.get('/', (req, res) => {
 
-	res.render('login/login.ejs');
+	res.render('login/login.ejs', {
+		message: req.session.message
+	});
 
 });
 
 //ROUTE FOR LOGGING IN
 router.post('/login', async (req, res, next) => {
 
-	// try {
+	try {
 
-	// 	const user = await User.findOne({username: req.body.username})
+		const user = await Users.findOne({username: req.body.username})
 		
-	// 	if(user){
+		if(user){
 
-	// 		//compare passwords
-	// 		if(bcrypt.compareSync(req.body.password, user.password)){
+			//compare passwords
+			if(bcrypt.compareSync(req.body.password, user.password)){
 
-	// 			req.session.logged = true;
-	// 			req.session.username = user.username; 
+				req.session.logged = true;
+				req.session.username = user.username; 
 
-	// 			console.log('----------------------------------------')
-	// 			console.log('USERS MATCH!')
-	// 			console.log('----------------------------------------')
+				console.log('----------------------------------------')
+				console.log('USERS MATCH!')
+				console.log('----------------------------------------')
 
-	// 			res.redirect('/articles');
+				res.redirect('/home');
 
-	// 		} else {
+			} else {
 
-	// 			// req.session.message = 'Username or Password Incorrect. Please Try Again.'
-	// 			console.log('----------------------------------------')
-	// 			console.log('USERNAMES DONT MATCH!')
-	// 			console.log('----------------------------------------')
-	// 			res.redirect('/')
+				req.session.message = 'Username or Password Incorrect. Please Try Again.'
+				console.log('----------------------------------------')
+				console.log('USERNAMES DONT MATCH!')
+				console.log('----------------------------------------')
+				res.redirect('/')
 
 
-	// 		}  
-	// 	//if the user is null or undefined
-	// 	} else {
+			}  
+		//if the user is null or undefined
+		} else {
 		
-	// 		// req.session.message = "Username or Password Incorrect. Please Try Again."
-	// 		console.log('----------------------------------------')
-	// 		console.log('USER NULL!')
-	// 		console.log('----------------------------------------')
-	// 		res.redirect('/')
-	// 	}
+			req.session.message = "Username or Password Incorrect. Please Try Again."
+			console.log('----------------------------------------')
+			console.log('USER NULL!')
+			console.log('----------------------------------------')
+			res.redirect('/')
+		}
 
-	// } catch (err){
+	} catch (err){
 
-	// 	next (err)
-	// }
+		next (err)
+	}
 
 })
 
