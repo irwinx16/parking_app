@@ -32,22 +32,8 @@ function initMap() {
     $('#submit').on('click', function() {
       geocodeAddress(geocoder, map);
 
-
-
-        $.ajax({
-      url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
-      type: "GET",
-      data: {
-        "$limit" : 5000,
-        "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
-      }
-        }).done(function(data) {
-          alert("Retrieved " + data.length + " records from the dataset!");
-          console.log(data);
-        });
-            });
-  }
-
+      
+});
 
 }
 
@@ -72,7 +58,10 @@ function geocodeAddress(geocoder, resultsMap) {
             for (let i = 0; i < data.length; i++) {
 
               const addr = {
-                
+              
+
+                // Do we just need address range and street name for matching purposes?
+
                 addresRangeHigh: data[i].address_range_high,
                 addresRangeLow: data[i].address_range_low,
                 streetDirection: data[i].street_direction,
@@ -82,20 +71,55 @@ function geocodeAddress(geocoder, resultsMap) {
           }
 
 
+                const addrNumber = results[0].address_components[0].short_name;
+                  // console.log(addr.addresRangeHigh);
+                  // console.log(addr.addresRangeLow);
 
-      const addrNumber = results[0].address_components[0].short_name;
-      // console.log(addr.addresRangeHigh);
-      // console.log(addr.addresRangeLow);
+                const streetNameVal = results[0].address_components[1].short_name;
 
-      if (addrNumber >= addr.addresRangeLow && addrNumber <= addr.addresRangeHigh) {
-        console.log('it is within number range');
-      } else {
-        console.log('doest work');
-            }
+                
+
+
+                 console.log(data[0]) 
+
+                  // data.street_name just gives us the NAME 
+                  // concatenatte street name street type and street direction into a string and compare it that way??
+
+                   console.log(results[0])
+
+
+                  // streetNameVal and addr.streetName are not same string 
+                  // console.log(streetNameVal)
+                  // console.log("----------");
+                  // console.log(addr.streetName);
+
+
+
+
+
+          // if (addrNumber >= addr.addresRangeLow && addrNumber <= addr.addresRangeHigh && streetNameVal === addr.streetName) {
+          //   // this keeps looping because add.addressRangeLow checks every line in the API 
+              // this also does not work because streetNameVal and add.streetnName dont't match 
+          //   console.log('There is a permit');
+          // } else {
+          //   console.log('There is no permit');
+          //       }
 
           
       }
-          // console.log(addr);
+       // console.log(addr);
+      // console.log(results[0].address_components[1].short_name)
+
+      
+
+
+                // console.log("----------");
+                // console.log(data[0].street_name)
+                //   // This is show as just the name (EX: HARDING)
+                //   // Needs to match or include streetName variable based on the adress typed in 
+                // console.log("----------");
+
+
 
         }); 
 
