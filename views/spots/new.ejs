@@ -2,18 +2,42 @@
 <html>
 <head>
 	<title> New Spot</title>
+
+	<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap">
+    </script>
 </head>
 <body>
-	<h1> Add a Spot</h1>
+	<h1> Check My Spot</h1>
 	<form action='/myspots' method='post'>
 		<select name='userId'>
 			<% for (let i = 0; i < users.length; i++) { -%>
 				<option value='<%= users[i].id%>'><%= users[i].username%></option>
 					<% } -%>
 		</select><br/>
+	</form>
+	<br>
+
+
+	<div id="floating-panel">
+	<input id="streetNum" type="textbox" value="Street Number">
+	<input id="streetDir" type="textbox" value="Street Direction">
+	<input id="street" type="textbox" value="Street Name">
+	<input id="city" type="textbox" value="Chicago, IL">
+  	<input id="submit" type="button" value="Geocode">
+</div>
+
+<br>
+
+<div id="map"></div>
+<br> 
+<br>
+
 		<input type='text' name='spotname'></input>
 		<button type='submit'>Add Spot</button>
-	</form>
 
+
+
+<script src="/js/app.js"></script>
 </body>
 </html>
