@@ -168,7 +168,6 @@ router.put('/:id', async (req, res) => {
 
 
 
-
 //ROUTE TO DELETE PAGE
 
 router.delete('/:id', async(req, res)  => {
