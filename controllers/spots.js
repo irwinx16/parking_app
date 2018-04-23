@@ -74,6 +74,10 @@ router.get('/:id/edit', async (req, res) => {
 
 		const foundSpot = await Spot.findById(req.params.id)
 
+		console.log("---- this is found spot in the edit route")
+		console.log(foundSpot)
+		console.log("---- this is found spot in the edit route")
+
 		// console.log("------- this is req.body id/edit route") 
 		// console.log(req.body) // THIS RETURNS {}
 		// console.log("------- this is req.body id/edit route") 
