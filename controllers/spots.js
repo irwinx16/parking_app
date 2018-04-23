@@ -51,9 +51,6 @@ router.post('/', async (req, res) => {
 
 		const foundUser = await User.findById(req.body.userId);
 		const addedSpot = await Spot.create(req.body);
-		console.log("-------req.body for adding spot")
-		console.log(req.body)
-		console.log("-------req.body for adding spot")
 
 		foundUser.spots.push(addedSpot);
 		foundUser.save((err, data) => {
@@ -64,6 +61,7 @@ router.post('/', async (req, res) => {
 	}	
 
 });
+
 
 
 // EDIT PAGE 
@@ -116,12 +114,11 @@ router.get('/:id', async (req, res) => {
 		
 	try {
 
-		const thisSpot = await Spot.findById(req.params.id)
-
+		const foundSpot = await Spot.findById(req.params.id)
 		const foundUser = await User.findOne({'spots._id': req.params.id})
 		
 		res.render('spots/show.ejs', {
-			spot: thisSpot, 
+			spot: foundSpot, 
 			user: foundUser 
 		})
 
@@ -131,61 +128,45 @@ router.get('/:id', async (req, res) => {
 })
 
 
-// PUT Route 
 
+// EDIT PAGE 
 
-router.put('/:id', async (req, res) => {
+router.get('/:id/edit', async (req, res) => {
 
 	try {
 
+		const foundSpot = await Spot.findById(req.params.id);
+		const allUsers = await User.find({});
+		const foundSpotUser = await User.findOne({'spots._id': req.params.id});
 
-		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true})
-
-		const foundUser = await User.findOne({'spots._id': req.params.id})
-
-		// res.redirect("/myspots")
-
-		if(foundUser._id != req.body.userId){
-			foundUser.spots.id(req.params.id).remove();
-
-			const savedFoundUser = await foundUser.save();
-
-			// console.log(savedFoundUser);
-			
-			const newUser = await User.findById(req.body.userId);
-
-			console.log("REQ.BODY AFTER 1st EDIT in PUT ROUTE ---------")
-			console.log(req.body)
-			console.log("REQ.BODY AFTER 1st EDIT in PUT ROUTE ---------")
-
-			// console.log(newUser); // this is NULL  
-
-			// The below CODE causes an empty object to return to screen BUT the change gets made in REQ.BODY
-
-			// newUser.spots.push(updatedSpot); 
-			// newUser.save((err, savedNewUser) => {
-			// 	res.redirect ('/myspots' + req.params.id);
-			// })
-
-			res.redirect('/myspots')
-		} else {
-
-			// foundUser.spots.id(req.params.id).remove();
-			// foundUser.spots.push(updatedSpot)
-			// console.log(foundUser)
-
-			// foundUser.save((err, data) => {
-				res.redirect ('/myspots');
-			// })
-
-		}
-
+		res.render('spots/edit.ejs', {
+			spot: foundSpot,
+			users: allUsers,
+			userSpot: foundSpotUser
+		})
 
 	} catch(err) {
 		res.send(err)
 	}
-	
-});
+
+
+})
+
+//POST ROUTE
+
+router.put('/:id', async (req, res) => {
+	try {
+		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body);
+		res.redirect('/myspots')
+
+	} catch (err) {
+		res.send(err);
+	}
+})
+
+
+
+
 
 
 
