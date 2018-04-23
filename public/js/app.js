@@ -25,7 +25,6 @@ $('a').on('click', (e) => {
 		}
 	}
 })
-
 //PUT THE MAP ON THE PAGE
 function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -33,22 +32,18 @@ function initMap() {
     center: {lat: 41.8781, lng: -87.6298}
   });
   const geocoder = new google.maps.Geocoder();
-
   document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
+
   });
 }
-
-
 //PUT A PIN ON THE MAP AT THE USER'S ADDRESS
 function geocodeAddress(geocoder, resultsMap) {
-
   const streetNum = document.getElementById('streetNum').value;
   const streetDir = document.getElementById('streetDir').value;
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
   const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
-
   geocoder.geocode({'address': address}, function(results, status) {
    
     if (status === 'OK') {
@@ -64,7 +59,6 @@ function geocodeAddress(geocoder, resultsMap) {
     }
   });
 }
-
 //RUN ADDRESS THROUGH CHICAGO PARKING API
 function zoneAddress(geocoder, resultsMap) {
   
@@ -82,22 +76,17 @@ function zoneAddress(geocoder, resultsMap) {
             "$limit" : 10000,
             "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
             }
-
         }).done(function(data) {
-
           //SPLIT ADDRESS INTO ARRAY OF STRINGS
           const addressSplit = address.split(' ')
           // console.log(addressSplit);
-
           //LOOP THROUGH THE DATA IN THE CHI PARKING API
           for (let i = 0; i < data.length; i++){
-
             //FIND STREET NAME IN PARKING API & MAKE IT LOWERCASE
             const findStreet = data[i].street_name;
             const lowStreet = findStreet.toLowerCase();
             //MAKE STRING FROM ADDRESS LOWERCASE
             const lowAddress = street.toLowerCase();
-
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
               // console.log('No Match')
@@ -109,12 +98,9 @@ function zoneAddress(geocoder, resultsMap) {
         }); 
     });
 }
-
 //FUNCTION TO FILTER BY STREET DIRECTION
 function directionCheck (streetNum, streetDir) {
-
   const userDirection = streetDir.toLowerCase().charAt(0);
-
   for(let i = 0; i < streetArray.length; i++){
     let chiDirection = streetArray[i].street_direction.toLowerCase();
     // console.log(streetArray[i]);
@@ -127,28 +113,38 @@ function directionCheck (streetNum, streetDir) {
   }
   findZone(streetNum);
 }
-
 //FUNCTION TO IDENTIFY ZONE 
-
 function findZone(streetNum) {
   // console.log(streetNum);
   // console.log("Now we will find the zone!");
-
   for(let i = 0; i < directionArray.length; i++){
-
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
-
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
+      console.log(streetArray);
+      console.log(directionArray);
       console.log(directionArray[i]);
+      // console.log(directionArray[i].zone)
+      
+
+      // MESSAGE TO DISPLAY ZONE NUMBER
+
+      const zone = directionArray[i].zone
+
+
+      const message = $("<h2>").text("Zone Number: " + zone)
+
+      $("body").append(message)
+
+
+      console.log(zone)
+
+
+
+
+
     } else {
-
     }
-
   }
-
 }
-
-
-
 
