@@ -2,6 +2,8 @@
 console.log("Connected");
 
 //CONSTANT VARIABLES
+const streetArray = [];
+const numArray = [];
 
 
 
@@ -98,20 +100,37 @@ function zoneAddress(geocoder, resultsMap) {
 
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
-              console.log('No Match')
+              // console.log('No Match')
             } else {
-              console.log(data[i])
+              streetArray.push(data[i]);
             }
-
           }
-
-          // City of Chicago
-          console.log(data[0]) 
-          //zone specific
-          console.log(data[0].zone)
-
+          findZone(streetNum, streetDir);
         }); 
     });
+}
+
+//FUNCTION TO FIND CORRECT STREET ZONE
+function findZone (streetNum, streetDir) {
+  console.log(streetNum);
+  console.log(streetDir);
+
+  const userDirection = streetDir.toLowerCase().charAt(0);
+
+  for(let i = 0; i < streetArray.length; i++){
+    let chiDirection = streetArray[i].street_direction.toLowerCase();
+    // console.log(streetArray[i]);
+    // console.log("User Direction " + userDirection);
+    // console.log("Chicago Direction " + chiDirection);
+    if(chiDirection == userDirection){
+      console.log('Directions Match!')
+      console.log(streetArray[i])
+    } else {
+      console.log(streetArray[i])
+      console.log('Directions do NOT Match!')
+    }
+  }
+  
 }
 
 
