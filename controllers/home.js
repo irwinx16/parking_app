@@ -6,10 +6,10 @@ const router = express.Router();
 router.get('/', (req, res) => {
 
 
+
 	if (req.session.logged){
 		
 		res.render('home/home.ejs');
-
 
 	} else {
 

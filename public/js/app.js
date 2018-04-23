@@ -1,6 +1,13 @@
 
 console.log("Connected");
 
+//CONSTANT VARIABLES
+const streetArray = [];
+const directionArray = [];
+
+
+
+//TOGGLE BETWEEN LOGIN & REGISTER
 $('a').on('click', (e) => {
 	console.log(e.currentTarget.innerText)
 
@@ -19,121 +26,127 @@ $('a').on('click', (e) => {
 	}
 })
 
+//PUT THE MAP ON THE PAGE
 function initMap() {
+  const map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: 41.8781, lng: -87.6298}
+  });
+  const geocoder = new google.maps.Geocoder();
 
-    const map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 10,
-      center: {lat: 41.8781, lng: -87.6298}
-    });
-    
-    const geocoder = new google.maps.Geocoder();
-
-
-    $('#submit').on('click', function() {
-      geocodeAddress(geocoder, map);
-
-      
-});
-
+  document.getElementById('submit').addEventListener('click', function() {
+    geocodeAddress(geocoder, map);
+  });
 }
 
 
-
+//PUT A PIN ON THE MAP AT THE USER'S ADDRESS
 function geocodeAddress(geocoder, resultsMap) {
-    const address = document.getElementById('address').value;
-    geocoder.geocode({'address': address}, function(results, status) {
-      // console.log(results[0].address_components[0].short_name);
 
-            $.ajax({
-          url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
-          type: "GET",
-          data: {
-          "$limit" : 10000,
-          "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
-          }
+  const streetNum = document.getElementById('streetNum').value;
+  const streetDir = document.getElementById('streetDir').value;
+  const street = document.getElementById('street').value;
+  const city = document.getElementById('city').value;
+  const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
+
+  geocoder.geocode({'address': address}, function(results, status) {
+   
+    if (status === 'OK') {
+      resultsMap.setCenter(results[0].geometry.location);
+      const marker = new google.maps.Marker({
+        map: resultsMap,
+        position: results[0].geometry.location
+      });
+      console.log(results[0]);
+      zoneAddress(geocoder, resultsMap);
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+//RUN ADDRESS THROUGH CHICAGO PARKING API
+function zoneAddress(geocoder, resultsMap) {
+  
+  const streetNum = document.getElementById('streetNum').value;
+  const streetDir = document.getElementById('streetDir').value;
+  const street = document.getElementById('street').value;
+  const city = document.getElementById('city').value;
+  const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
+  
+  geocoder.geocode({'address': address}, function(results, status) {
+          $.ajax({
+            url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
+            type: "GET",
+            data: {
+            "$limit" : 10000,
+            "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
+            }
 
         }).done(function(data) {
-          // alert("Retrieved " + data.length + " records from the dataset!");
 
-            for (let i = 0; i < data.length; i++) {
+          //SPLIT ADDRESS INTO ARRAY OF STRINGS
+          const addressSplit = address.split(' ')
+          // console.log(addressSplit);
 
-              const addr = {
-              
+          //LOOP THROUGH THE DATA IN THE CHI PARKING API
+          for (let i = 0; i < data.length; i++){
 
-                // Do we just need address range and street name for matching purposes?
+            //FIND STREET NAME IN PARKING API & MAKE IT LOWERCASE
+            const findStreet = data[i].street_name;
+            const lowStreet = findStreet.toLowerCase();
+            //MAKE STRING FROM ADDRESS LOWERCASE
+            const lowAddress = street.toLowerCase();
 
-                addresRangeHigh: data[i].address_range_high,
-                addresRangeLow: data[i].address_range_low,
-                streetDirection: data[i].street_direction,
-                streetName: data[i].street_name,
-                zone: data[i].zone
-
+            //LOOK FOR STREET NAME WITHIN CHICAGO LIST
+            if (lowStreet.indexOf(lowAddress)) {
+              // console.log('No Match')
+            } else {
+              streetArray.push(data[i]);
+            }
           }
-
-
-                const addrNumber = results[0].address_components[0].short_name;
-                  // console.log(addr.addresRangeHigh);
-                  // console.log(addr.addresRangeLow);
-
-                const streetNameVal = results[0].address_components[1].short_name;
-
-                
-
-
-                 console.log(data[0]) 
-
-                  // data.street_name just gives us the NAME 
-                  // concatenatte street name street type and street direction into a string and compare it that way??
-
-                   console.log(results[0])
-
-
-                  // streetNameVal and addr.streetName are not same string 
-                  // console.log(streetNameVal)
-                  // console.log("----------");
-                  // console.log(addr.streetName);
-
-
-
-
-
-          // if (addrNumber >= addr.addresRangeLow && addrNumber <= addr.addresRangeHigh && streetNameVal === addr.streetName) {
-          //   // this keeps looping because add.addressRangeLow checks every line in the API 
-              // this also does not work because streetNameVal and add.streetnName dont't match 
-          //   console.log('There is a permit');
-          // } else {
-          //   console.log('There is no permit');
-          //       }
-
-          
-      }
-       // console.log(addr);
-      // console.log(results[0].address_components[1].short_name)
-
-      
-
-
-                // console.log("----------");
-                // console.log(data[0].street_name)
-                //   // This is show as just the name (EX: HARDING)
-                //   // Needs to match or include streetName variable based on the adress typed in 
-                // console.log("----------");
-
-
-
+          directionCheck(streetNum, streetDir);
         }); 
-
-
-      if (status === 'OK') {
-        resultsMap.setCenter(results[0].geometry.location);
-        const marker = new google.maps.Marker({
-          map: resultsMap,
-          position: results[0].geometry.location
-        });
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
     });
+}
+
+//FUNCTION TO FILTER BY STREET DIRECTION
+function directionCheck (streetNum, streetDir) {
+
+  const userDirection = streetDir.toLowerCase().charAt(0);
+
+  for(let i = 0; i < streetArray.length; i++){
+    let chiDirection = streetArray[i].street_direction.toLowerCase();
+    // console.log(streetArray[i]);
+    // console.log("User Direction " + userDirection);
+    // console.log("Chicago Direction " + chiDirection);
+    if(chiDirection == userDirection){
+      directionArray.push(streetArray[i]);
+    } else {
+    }
+  }
+  findZone(streetNum);
+}
+
+//FUNCTION TO IDENTIFY ZONE 
+
+function findZone(streetNum) {
+  // console.log(streetNum);
+  // console.log("Now we will find the zone!");
+
+  for(let i = 0; i < directionArray.length; i++){
+
+    let lowerLimit = directionArray[i].address_range_low;
+    let upperLimit = directionArray[i].address_range_high;
+
+    if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
+      console.log(directionArray[i]);
+    } else {
+
+    }
+
+  }
+
 }
 
 
