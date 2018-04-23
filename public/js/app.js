@@ -3,7 +3,7 @@ console.log("Connected");
 
 //CONSTANT VARIABLES
 const streetArray = [];
-const numArray = [];
+const directionArray = [];
 
 
 
@@ -87,7 +87,7 @@ function zoneAddress(geocoder, resultsMap) {
 
           //SPLIT ADDRESS INTO ARRAY OF STRINGS
           const addressSplit = address.split(' ')
-          console.log(addressSplit);
+          // console.log(addressSplit);
 
           //LOOP THROUGH THE DATA IN THE CHI PARKING API
           for (let i = 0; i < data.length; i++){
@@ -105,15 +105,13 @@ function zoneAddress(geocoder, resultsMap) {
               streetArray.push(data[i]);
             }
           }
-          findZone(streetNum, streetDir);
+          directionCheck(streetNum, streetDir);
         }); 
     });
 }
 
-//FUNCTION TO FIND CORRECT STREET ZONE
-function findZone (streetNum, streetDir) {
-  console.log(streetNum);
-  console.log(streetDir);
+//FUNCTION TO FILTER BY STREET DIRECTION
+function directionCheck (streetNum, streetDir) {
 
   const userDirection = streetDir.toLowerCase().charAt(0);
 
@@ -123,14 +121,32 @@ function findZone (streetNum, streetDir) {
     // console.log("User Direction " + userDirection);
     // console.log("Chicago Direction " + chiDirection);
     if(chiDirection == userDirection){
-      console.log('Directions Match!')
-      console.log(streetArray[i])
+      directionArray.push(streetArray[i]);
     } else {
-      console.log(streetArray[i])
-      console.log('Directions do NOT Match!')
     }
   }
-  
+  findZone(streetNum);
+}
+
+//FUNCTION TO IDENTIFY ZONE 
+
+function findZone(streetNum) {
+  // console.log(streetNum);
+  // console.log("Now we will find the zone!");
+
+  for(let i = 0; i < directionArray.length; i++){
+
+    let lowerLimit = directionArray[i].address_range_low;
+    let upperLimit = directionArray[i].address_range_high;
+
+    if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
+      console.log(directionArray[i]);
+    } else {
+
+    }
+
+  }
+
 }
 
 
