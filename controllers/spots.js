@@ -169,8 +169,28 @@ router.put('/:id', async (req, res) => {
 
 
 
-
 //ROUTE TO DELETE PAGE
+
+router.delete('/:id', async(req, res)  => {
+	try{
+
+
+	const deletedSpot = await Spot.findByIdAndRemove(req.params.id);
+	const foundUser = await User.findOne({'spots._id': req.params.id});
+
+		foundUser.spots.id(req.params.id).remove();
+		foundUser.save((err, data) => {
+			res.redirect('/myspots');
+		});
+
+
+	} catch(err) {
+
+		res.send(err)
+	}
+})
+
+
 
 
 module.exports = router;

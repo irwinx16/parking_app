@@ -12,12 +12,12 @@
 		Spot Name: <input type="text" name="spotname" value="<%=spot.spotname%>"><br>
 
 		<button type="Submit">Update Spot</button> 
-
-
-
 	</form>
 
 
+	<form action="/myspots/<%= spot.id%>?_method=DELETE" method="POST">
+		<button>delete</button>
+	</form>
 
 
 
