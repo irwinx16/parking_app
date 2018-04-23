@@ -7,7 +7,17 @@ const Spot = require('../models/spots.js')
 
 router.get('/', async (req,res) => {
 
-	res.render('spots/index.ejs')	
+	try {
+
+		const foundSpots = await Spot.find();
+		res.render('spots/index.ejs', {
+			spots: foundSpots
+		})
+	} catch (err) {
+
+		res.send(err)
+	}
+
 
 });
 
@@ -34,9 +44,36 @@ router.get('/new', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
-	res.send('Post Spot')
+	try {
+
+		const foundUser = await User.findById(req.body.userId);
+		const addedSpot = await Spot.create(req.body);
+
+		foundUser.spots.push(addedSpot);
+		foundUser.save((err, data) => {
+			res.redirect ('/myspots')
+		})
+	} catch (err) {
+		res.send(err)
+	}	
 
 });
+
+//ROUTE TO SHOW PAGE
+
+router.get('/:id', async (req, res) => {
+		
+	try {
+		
+		res.render('spots/show.ejs')
+
+	} catch (err) {
+		res.send(err)
+	}
+})
+
+//ROUTE TO DELETE PAGE
+
 
 module.exports = router;
 
