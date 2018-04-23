@@ -12,7 +12,7 @@ const PORT = 3000;
 require('./db/db');
 
 app.use(session({
-
+	secret: 'secret string',
 	resave: false,
 	//Only when we add a property to the session do we save it. Don't save useless info to the session. 
 	saveUninitialized: false,
