@@ -31,3 +31,9 @@ html, body {
   line-height: 30px;
   padding-left: 10px;
 }
+
+
+
+.jumbotron {
+  background-color: #fefefe;
+}
