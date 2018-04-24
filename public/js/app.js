@@ -129,15 +129,14 @@ function findZone(streetNum) {
 
       // MESSAGE TO DISPLAY ZONE NUMBER
 
-      const zone = directionArray[i].zone
+        const zone = directionArray[i].zone
+
+        const message = $("<h2>").text("Zone Number: " + zone)
+
+        $("body").append(message)
 
 
-      const message = $("<h2>").text("Zone Number: " + zone)
-
-      $("body").append(message)
-
-
-      console.log(zone)
+        console.log(zone)
 
 
 
