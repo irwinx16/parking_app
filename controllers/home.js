@@ -19,13 +19,15 @@ router.get('/', (req, res) => {
 });
 
 //ROUTE TO LOG OUT
-router.get('/', (req, res) => {
-
-	res.send('LOGOUT')
-
-// 	// req.session.logged = false;
-// 	req.session.message = "Succesful Logout."
-// 	// res.rerender('/');
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if(err) {
+			console.log("That didn't work. Session still running. ", err)
+		} else {
+			console.log("Logout Succesful. Session Destroyed")
+			res.redirect('/')
+		}
+	})	
 })
 
 module.exports = router;
