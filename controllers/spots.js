@@ -108,7 +108,7 @@ router.put('/:id', async (req, res, next) => {
 		// foundUser.spots.id(req.params.id).remove();
 		// foundUser.spots.push(updatedSpot);
 		foundUser.save((err, data) => {
-			res.redirect('/myspots/' + req.params.id)
+			res.redirect('/myspots/')
 			
 		});
 
