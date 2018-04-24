@@ -43,20 +43,19 @@ router.get('/new', async (req, res) => {
 
 //ROUTE TO ADD SPOT
 
+
 router.post('/', async (req, res) => {
-
-	try {
-		
-		const foundUser = await User.findOne({'username': req.session.username})
-		const addedSpot = await Spot.create(req.body);
-
-		foundUser.spots.push(addedSpot);
-		foundUser.save((err, data) => {
-			res.redirect ('/myspots')
-		})
-	} catch (err) {
-		res.send(err)
-	}	
+    try {
+        
+        const foundUser = await User.findOne({'username': req.session.username})
+        const addedSpot = await Spot.create(req.body);
+        foundUser.spots.push(addedSpot);
+        foundUser.save((err, data) => {
+            res.redirect ('/myspots')
+        })
+    } catch (err) {
+        res.send(err)
+    }   
 });
 
 //ROUTE TO SHOW PAGE
@@ -120,19 +119,6 @@ router.put('/:id', async (req, res, next) => {
 	}
 })
 
-//ROUTE TO DELETE
-router.delete('/:id', async(req, res)  => {
-    try{
-    const deletedSpot = await Spot.findByIdAndRemove(req.params.id);
-    const foundUser = await User.findOne({'spots._id': req.params.id});
-        foundUser.spots.id(req.params.id).remove();
-        foundUser.save((err, data) => {
-            res.redirect('/myspots');
-        });
-    } catch(err) {
-        res.send(err)
-    }
-})
 
 //ROUTE TO LOG OUT
 router.get('/logout', (req, res) => {

@@ -104,15 +104,18 @@ function zoneAddress(geocoder, resultsMap) {
             const lowAddress = street.toLowerCase();
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
+              //This displays all of the objects where the streets that are NOT matches
               // console.log('No Match')
 
             } else {
+              //This pushes all of the streets where objects ARE matches
               streetArray.push(data[i]);
 
 
             }
           }
           directionCheck(streetNum, streetDir);
+
         }); 
     });
 }
@@ -130,7 +133,9 @@ function directionCheck (streetNum, streetDir) {
 
     }
   }
+
   findZone(streetNum);
+
 }
 //FUNCTION TO IDENTIFY ZONE 
 function findZone(streetNum) {
@@ -147,17 +152,13 @@ function findZone(streetNum) {
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
+
       console.log(address);
       $('#zone').val(zone)
     } else {
+
+      }
       
 
     }
-
-  }
-
 }
-
-
-
-

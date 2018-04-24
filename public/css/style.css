@@ -37,3 +37,9 @@ html, body {
 .jumbotron {
   background-color: #fefefe;
 }
+
+.container-fluid {
+  height: 100%;
+  background: url("https://images6.alphacoders.com/423/thumb-1920-423653.jpg") no-repeat center center;
+}
+
