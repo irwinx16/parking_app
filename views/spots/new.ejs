@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html>
+
+
 <head>
+
+
 
 
 <nav class= "justify-content-center nav-fill">
@@ -21,17 +25,13 @@
 </nav>
 
 
-
 	<title> New Spot</title>
 
-	<script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap">
-    </script>
 
 
 </head>
 <body>
-	<h1> Check My Spot</h1>
+	<h1 class="text-center"> Check My Spot</h1>
 
 
 
@@ -41,11 +41,10 @@
 		<input id="streetDir" type="textbox" value="Street Direction">
 		<input id="street" type="textbox" value="Street Name">
 		<input id="city" type="textbox" value="Chicago, IL">
-	  	<input id="submit" type="button" value="Geocode">
+	  	<input id="submit" type="button" value="Search">
 	</div>
 
 <br>
-
 
 
 <div id="map"></div>
@@ -61,5 +60,8 @@
 
 
 <script src="/js/app.js"></script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap">
+</script>
 </body>
 </html>

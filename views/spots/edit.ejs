@@ -2,9 +2,32 @@
 <html>
 <head>
 	<title></title>
+
+	<nav class= "justify-content-center nav-fill">
+		<ul class="nav justify-content-center alert alert-light ">
+	  <li class="nav-item">
+	    <a class="nav-link active text-dark" href="/home">Home</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link text-dark" href="/myspots/">My Spots</a>
+	  </li>
+	  <li class="nav-item">
+	    <a class="nav-link text-dark" href="/logout">Logout</a>
+	  </li>
+	</ul>
+	</nav>
+
+
+
+
+
+
 </head>
 <body>
-	<h1>Edit your Spot</h1>
+	<h1 class="text-center">Edit your Spot</h1>
 
 
 	<form action="/myspots/<%= spot._id%>?_method=PUT" method="post">
