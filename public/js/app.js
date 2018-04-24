@@ -3,6 +3,8 @@ console.log("Connected");
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
+let zone = 0;
+
 
 
 
@@ -57,7 +59,9 @@ function geocodeAddress(geocoder, resultsMap) {
   const streetDir = document.getElementById('streetDir').value;
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
-  const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
+  const address = (streetNum + ' ' + streetDir + ' ' + street + ', ' + city);
+
+  $('#address').val(address)
 
   geocoder.geocode({'address': address}, function(results, status) {
    
@@ -150,7 +154,14 @@ function findZone(streetNum) {
     let upperLimit = directionArray[i].address_range_high;
 
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
+      zone = directionArray[i].zone
+      console.log('Zone is ' + zone)
       console.log(directionArray[i]);
+      console.log(address);
+      $('#zone').val(zone)
+
+
+
     } else {
 
     }
