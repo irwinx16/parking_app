@@ -40,7 +40,7 @@ $('a').on('click', (e) => {
 //PUT THE MAP ON THE PAGE
 function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
+    zoom: 11,
     center: {lat: 41.8781, lng: -87.6298}
   });
   const geocoder = new google.maps.Geocoder();
@@ -105,8 +105,11 @@ function zoneAddress(geocoder, resultsMap) {
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
               // console.log('No Match')
+
             } else {
               streetArray.push(data[i]);
+
+
             }
           }
           directionCheck(streetNum, streetDir);
@@ -124,6 +127,7 @@ function directionCheck (streetNum, streetDir) {
     if(chiDirection == userDirection){
       directionArray.push(streetArray[i]);
     } else {
+
     }
   }
   findZone(streetNum);
@@ -132,24 +136,30 @@ function directionCheck (streetNum, streetDir) {
 function findZone(streetNum) {
   // console.log(streetNum);
   // console.log("Now we will find the zone!");
+
+
   for(let i = 0; i < directionArray.length; i++){
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
+
+
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
       console.log(address);
       $('#zone').val(zone)
-
-
-
     } else {
       zone = 'No Zone'
       $('#zone').val(zone)
       console.log('No Zone Detected');
 
     }
+
   }
+
 }
+
+
+
 

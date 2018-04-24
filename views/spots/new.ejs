@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+<nav class= "justify-content-center nav-fill">
+	<ul class="nav justify-content-center alert alert-light ">
+  <li class="nav-item">
+    <a class="nav-link active text-dark" href="/home">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="/myspots/">My Spots</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="#">Logout</a>
+  </li>
+</ul>
+</nav>
+
+
+
 	<title> New Spot</title>
 
 	<script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap">
     </script>
+
+
 </head>
 <body>
 	<h1> Check My Spot</h1>
+
+
+	<form action='/myspots' method='post'>
+		<input type='text' name='spotname'></input>
+		<button type='submit'>Add Spot</button>
+	</form>
+
 	<br>
 
 
