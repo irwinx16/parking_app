@@ -3,7 +3,7 @@ console.log("Connected");
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
-let zone = 0;
+let zone = 'No Zone Detected';
 
 
 
@@ -104,15 +104,18 @@ function zoneAddress(geocoder, resultsMap) {
             const lowAddress = street.toLowerCase();
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
+              //This displays all of the objects where the streets that are NOT matches
               // console.log('No Match')
 
             } else {
+              //This pushes all of the streets where objects ARE matches
               streetArray.push(data[i]);
 
 
             }
           }
           directionCheck(streetNum, streetDir);
+
         }); 
     });
 }
@@ -130,7 +133,9 @@ function directionCheck (streetNum, streetDir) {
 
     }
   }
+
   findZone(streetNum);
+
 }
 //FUNCTION TO IDENTIFY ZONE 
 function findZone(streetNum) {
@@ -148,16 +153,21 @@ function findZone(streetNum) {
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
       console.log(address);
-      $('#zone').val(zone)
+      // $('#zone').val(zone)
     } else {
-      
+
+      }
 
     }
 
-  }
+    if(zone > 0){
+      $('#zone').val('Your Spot is in Zone ' + zone)
+      $('#returnZone').text('Your Spot is in Zone ' + zone)
+
+    } else {
+      $('#zone').val(zone)
+      $('#returnZone').text(zone)
+    }
 
 }
-
-
-
 
