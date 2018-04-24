@@ -89,12 +89,15 @@ function zoneAddress(geocoder, resultsMap) {
             const lowAddress = street.toLowerCase();
             //LOOK FOR STREET NAME WITHIN CHICAGO LIST
             if (lowStreet.indexOf(lowAddress)) {
+              //This displays all of the objects where the streets that are NOT matches
               // console.log('No Match')
             } else {
+              //This pushes all of the streets where objects ARE matches
               streetArray.push(data[i]);
             }
           }
           directionCheck(streetNum, streetDir);
+
         }); 
     });
 }
@@ -109,41 +112,49 @@ function directionCheck (streetNum, streetDir) {
     if(chiDirection == userDirection){
       directionArray.push(streetArray[i]);
     } else {
+
     }
   }
+
   findZone(streetNum);
+
 }
 //FUNCTION TO IDENTIFY ZONE 
 function findZone(streetNum) {
   // console.log(streetNum);
   // console.log("Now we will find the zone!");
+
+
   for(let i = 0; i < directionArray.length; i++){
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
+
+
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
       console.log(streetArray);
       console.log(directionArray);
       console.log(directionArray[i]);
       // console.log(directionArray[i].zone)
-      
-
       // MESSAGE TO DISPLAY ZONE NUMBER
 
-        const zone = directionArray[i].zone
+        let zone = directionArray[i].zone
 
-        const message = $("<h2>").text("Zone Number: " + zone)
+        const message = $("<h2>").text("Zone Number: " + zone + "." + " Check street signs - Parking not permitted from 6PM to 6AM")
 
         $("body").append(message)
-
 
         console.log(zone)
 
 
-
-
-
     } else {
+
+      // CANNOT GO HERE 
+
+          const noPermit = $("<h2>").text("No parking restrictions enforced")
+
+          $("body").append(noPermit)
+
+          // // return 
     }
   }
 }
-

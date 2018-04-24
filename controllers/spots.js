@@ -45,21 +45,19 @@ router.get('/new', async (req, res) => {
 
 //ROUTE TO ADD SPOT
 
+
 router.post('/', async (req, res) => {
-
-	try {
-
-		const foundUser = await User.findById(req.body.userId);
-		const addedSpot = await Spot.create(req.body);
-
-		foundUser.spots.push(addedSpot);
-		foundUser.save((err, data) => {
-			res.redirect ('/myspots')
-		})
-	} catch (err) {
-		res.send(err)
-	}	
-
+    try {
+        
+        const foundUser = await User.findOne({'username': req.session.username})
+        const addedSpot = await Spot.create(req.body);
+        foundUser.spots.push(addedSpot);
+        foundUser.save((err, data) => {
+            res.redirect ('/myspots')
+        })
+    } catch (err) {
+        res.send(err)
+    }   
 });
 
 

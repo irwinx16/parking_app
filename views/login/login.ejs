@@ -1,23 +1,26 @@
+<div class="jumbotron jumbotron-fluid container-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome to Parking Zone Chicago!</h1>
+    <p class="lead">Find out if your address require a permit zone.</p>
+  
 
 
-<h1> PARKING APP LOGINs </h1>
+<!-- <h1> PARKING APP LOGINs </h1> -->
 
 		<% if (message) { %>
-			<p style='background-color: white'><%= message %> </p>
+			<p style='background-color: transparent;'><%= message %> </p>
 		<%} -%>
 
-	<nav class='navbar navbar-dark bg-dark'>
-		<div class='navbar'>
-			<ul class='navbar-nav'>
-				<li class='active'>
-					<a href="#" class='nav-link'">Login</a>
-				</li>
-				<li>
-					<a href="#" class='nav-link'> Registration</a>
-				</li>
-		</ul>
-		</div>
-	</nav>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="registration-tab" data-toggle="tab" href="#registration" role="tab" aria-controls="registration" aria-selected="false">Registration</a>
+  </li>
+</ul>
+
+
 	<form action='/login' method='post' id='login' class='visible'>
 		<input type='text' name='username' placeholder='username'>
 		<input type='password' name='password' placeholder='password'>
@@ -29,6 +32,8 @@
 		<input type='password' name='password' placeholder='password'>
 		<button type='submit'>REGISTER</button>
 	</form>
+	</div>
+</div>
 
 	<script type="text/javascript" src="/js/app.js"></script>
 
