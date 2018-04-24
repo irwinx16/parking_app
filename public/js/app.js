@@ -15,19 +15,25 @@ $('a').on('click', (e) => {
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible')
 		}
-	} else if(e.currentTarget.innerText === 'Logout') {
-    console.log('Logout Clicked')
-  }
-
-   else if (e.currentTarget.innerText === 'Registration'){
+	} else if (e.currentTarget.innerText === 'Registration'){
 		if($('#registration').hasClass('invisible')){
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible');
-	} else {
-	 	console.log('do nothing')
-		}
-	}
-})
+      } else {
+        console.log('do nothing')
+		  }
+	} else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
+    //   if(err){
+    //     console.log("Uh Oh. That didn't work. Session Still Running.")
+    //   } else {
+    //     console.log('Logout Successful. Session Destroyed.')
+    //     res.redirect('/')
+    //   }
+    // })
+
+    console.log('Logout Clicked')
+  }
+});
 
 
 //PUT THE MAP ON THE PAGE

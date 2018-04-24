@@ -6,7 +6,7 @@
 <body>
 	<h1> My Spots </h1>
 	<a href="/myspots/new">Add a Spot</a>
-		<% for(var i = 0; i <spots.length; i++) {%>
+		<% for(let i = 0; i <spots.length; i++) {%>
 			<li> 
 				<a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a>
 			</li>
