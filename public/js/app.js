@@ -150,9 +150,7 @@ function findZone(streetNum) {
       console.log(address);
       $('#zone').val(zone)
     } else {
-      zone = 'No Zone'
-      $('#zone').val(zone)
-      console.log('No Zone Detected');
+      
 
     }
 
