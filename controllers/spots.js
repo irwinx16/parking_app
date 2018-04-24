@@ -102,7 +102,7 @@ router.put('/:id', async (req, res, next) => {
 		const foundUser = await User.findOne({'username': req.session.username})
 
 		// get spot from spots collection matching :id
-		// const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
 		foundUser.spots.id(req.params.id).spotname = req.body.spotname		
 		// foundUser.spots.id(req.params.id).remove();
