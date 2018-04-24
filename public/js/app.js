@@ -63,12 +63,12 @@ function geocodeAddress(geocoder, resultsMap) {
    
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
-      const marker = new google.maps.Marker({
+      let marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
-      console.log(results[0]);
-      zoneAddress(geocoder, resultsMap);
+      // console.log(results[0]);
+      // zoneAddress(geocoder, resultsMap);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
