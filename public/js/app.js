@@ -7,6 +7,7 @@ let zone = 0;
 
 
 
+
 //TOGGLE BETWEEN LOGIN & REGISTER
 $('a').on('click', (e) => {
 	console.log(e.currentTarget.innerText)
@@ -16,19 +17,25 @@ $('a').on('click', (e) => {
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible')
 		}
-	} else if(e.currentTarget.innerText === 'Logout') {
-    console.log('Logout Clicked')
-  }
-
-   else if (e.currentTarget.innerText === 'Registration'){
+	} else if (e.currentTarget.innerText === 'Registration'){
 		if($('#registration').hasClass('invisible')){
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible');
-	} else {
-	 	console.log('do nothing')
-		}
-	}
-})
+      } else {
+        console.log('do nothing')
+		  }
+	} else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
+    //   if(err){
+    //     console.log("Uh Oh. That didn't work. Session Still Running.")
+    //   } else {
+    //     console.log('Logout Successful. Session Destroyed.')
+    //     res.redirect('/')
+    //   }
+    // })
+
+    console.log('Logout Clicked')
+  }
+});
 
 //PUT THE MAP ON THE PAGE
 function initMap() {
@@ -48,7 +55,10 @@ function geocodeAddress(geocoder, resultsMap) {
   const streetDir = document.getElementById('streetDir').value;
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
-  const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
+  const address = (streetNum + ' ' + streetDir + ' ' + street + ', ' + city);
+
+  $('#address').val(address)
+
   geocoder.geocode({'address': address}, function(results, status) {
    
     if (status === 'OK') {
@@ -134,30 +144,28 @@ function findZone(streetNum) {
 
 
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
-      console.log(streetArray);
-      console.log(directionArray);
+      zone = directionArray[i].zone
+      console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-      // console.log(directionArray[i].zone)
-      // MESSAGE TO DISPLAY ZONE NUMBER
-
-        let zone = directionArray[i].zone
-
-        const message = $("<h2>").text("Zone Number: " + zone + "." + " Check street signs - Parking not permitted from 6PM to 6AM")
-
-        $("body").append(message)
-
-        console.log(zone)
 
 
     } else {
+
+      console.log(address);
+      $('#zone').val(zone)
+
 
       // CANNOT GO HERE 
 
           // const noPermit = $("<h2>").text("No parking restrictions enforced")
 
-          // $("body").append(noPermit)
 
-          // // return 
+    } else {
+      zone = 'No Zone'
+      $('#zone').val(zone)
+      console.log('No Zone Detected');
+
+
     }
 
 

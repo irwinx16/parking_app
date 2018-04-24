@@ -9,14 +9,13 @@ router.get('/', async (req,res) => {
 
 	try {
 
-		const foundSpots = await Spot.find();
-		// console.log(foundSpots) // THIS WORKS
+		const foundUser = await User.findOne({'username': req.session.username})
+		const spots = foundUser.spots
+
 		res.render('spots/index.ejs', {
-			spots: foundSpots
+			spots: spots
 		})
-		// console.log("----- this is req.body in the / route") 
-		// console.log(req.body)
-		// console.log("----- this is req.body in the / route")
+
 	} catch (err) {
 
 		res.send(err)
@@ -33,7 +32,9 @@ router.get('/new', async (req, res) => {
 
 	try {
 		const foundUser = await User.findOne({username: req.session.username})
-		res.render('spots/new.ejs')
+		res.render('spots/new.ejs',{
+			message: req.session.message
+		})
 
 	} catch (err) {
 		res.send(err)
@@ -44,16 +45,20 @@ router.get('/new', async (req, res) => {
 
 router.post('/', async (req, res) => {
 
-    try {
-        const foundUser = await User.findOne({'username': req.session.username})
-        const addedSpot = await Spot.create(req.body);
-        foundUser.spots.push(addedSpot);
-        foundUser.save((err, data) => {
-            res.redirect ('/myspots')
-        })
-    } catch (err) {
-        res.send(err)
-    }   
+
+  
+	try {
+		
+		const foundUser = await User.findOne({'username': req.session.username})
+		const addedSpot = await Spot.create(req.body);
+
+		foundUser.spots.push(addedSpot);
+		foundUser.save((err, data) => {
+			res.redirect ('/myspots')
+		})
+	} catch (err) {
+		res.send(err)
+	}	
 });
 
 //ROUTE TO SHOW PAGE
@@ -78,38 +83,69 @@ router.get('/:id', async (req, res) => {
 
 
 // EDIT PAGE 
-
 router.get('/:id/edit', async (req, res) => {
-
-	try {
-
-		const foundSpot = await Spot.findById(req.params.id);
-		const allUsers = await User.find({});
-		const foundSpotUser = await User.findOne({'spots._id': req.params.id});
-
-		res.render('spots/edit.ejs', {
-			spot: foundSpot,
-			users: allUsers,
-			userSpot: foundSpotUser
-		})
-
-	} catch(err) {
-		res.send(err)
-	}
-
-
+    try {
+        const foundSpot = await Spot.findById(req.params.id);
+        const foundSpotUser = await User.findOne({'spots._id': req.params.id});
+        res.render('spots/edit.ejs', {
+            spot: foundSpot,
+            userSpot: foundSpotUser
+        })
+    } catch(err) {
+        res.send(err)
+    }
 })
 
 //POST ROUTE
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', async (req, res, next) => {
 	try {
-		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body);
-		res.redirect('/myspots')
+		// get user from session
+		const foundUser = await User.findOne({'username': req.session.username})
+
+		// get spot from spots collection matching :id
+		// const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+		foundUser.spots.id(req.params.id).spotname = req.body.spotname		
+		// foundUser.spots.id(req.params.id).remove();
+		// foundUser.spots.push(updatedSpot);
+		foundUser.save((err, data) => {
+			res.redirect('/myspots/' + req.params.id)
+			
+		});
+
+		// res.send(updatedSpot)
+		// res.redirect('/myspots')
 
 	} catch (err) {
-		res.send(err);
+		next(err);
 	}
+})
+
+//ROUTE TO DELETE
+router.delete('/:id', async(req, res)  => {
+    try{
+    const deletedSpot = await Spot.findByIdAndRemove(req.params.id);
+    const foundUser = await User.findOne({'spots._id': req.params.id});
+        foundUser.spots.id(req.params.id).remove();
+        foundUser.save((err, data) => {
+            res.redirect('/myspots');
+        });
+    } catch(err) {
+        res.send(err)
+    }
+})
+
+//ROUTE TO LOG OUT
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if(err) {
+			console.log("That didn't work. Session still running. ", err)
+		} else {
+			console.log("Logout Succesful. Session Destroyed")
+			res.redirect('/')
+		}
+	})	
 })
 
 

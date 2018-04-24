@@ -3,7 +3,9 @@ const mongoose = require('mongoose');
 //how all of the objects in the collection will look
 const spotSchema = new mongoose.Schema({
 	username: String,
-	spotname: String
+	spotname: String,
+	zone: String,
+	address: String
 });
 
 //Creating the collection --> author will be the name of the collection

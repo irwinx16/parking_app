@@ -16,7 +16,6 @@ router.get('/', (req, res) => {
 router.post('/login', async (req, res, next) => {
 
 	try {
-
 		const user = await Users.findOne({username: req.body.username})
 		
 		if(user){
@@ -37,7 +36,6 @@ router.post('/login', async (req, res, next) => {
 
 
 			}  
-		//if the user is null or undefined
 		} else {
 		
 			req.session.message = "Username or Password Incorrect. Please Try Again."
@@ -87,4 +85,17 @@ router.post('/registration', async (req, res) => {
 	}
 });
 
+
+
+//ROUTE TO LOG OUT
+router.get('/logout', (req, res) => {
+	req.session.destroy((err) => {
+		if(err) {
+			console.log("That didn't work. Session still running. ", err)
+		} else {
+			console.log("Logout Succesful. Session Destroyed")
+			res.redirect('/')
+		}
+	})	
+})
 module.exports = router;
