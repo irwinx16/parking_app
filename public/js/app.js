@@ -3,6 +3,8 @@ console.log("Connected");
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
+let zone = 0;
+
 
 
 
@@ -53,7 +55,10 @@ function geocodeAddress(geocoder, resultsMap) {
   const streetDir = document.getElementById('streetDir').value;
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
-  const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
+  const address = (streetNum + ' ' + streetDir + ' ' + street + ', ' + city);
+
+  $('#address').val(address)
+
   geocoder.geocode({'address': address}, function(results, status) {
    
     if (status === 'OK') {
@@ -131,28 +136,17 @@ function findZone(streetNum) {
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
-      console.log(streetArray);
-      console.log(directionArray);
+      zone = directionArray[i].zone
+      console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-      // console.log(directionArray[i].zone)
-      
-
-      // MESSAGE TO DISPLAY ZONE NUMBER
-
-        const zone = directionArray[i].zone
-
-        const message = $("<h2>").text("Zone Number: " + zone)
-
-        $("body").append(message)
-
-
-        console.log(zone)
-
-
+      console.log(address);
+      $('#zone').val(zone)
 
 
 
     } else {
+      console.log('No Zone Detected');
+
     }
   }
 }

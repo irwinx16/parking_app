@@ -32,7 +32,9 @@ router.get('/new', async (req, res) => {
 
 	try {
 		const foundUser = await User.findOne({username: req.session.username})
-		res.render('spots/new.ejs')
+		res.render('spots/new.ejs',{
+			message: req.session.message
+		})
 
 	} catch (err) {
 		res.send(err)
@@ -42,7 +44,6 @@ router.get('/new', async (req, res) => {
 //ROUTE TO ADD SPOT
 
 router.post('/', async (req, res) => {
-
 	try {
 		
 		const foundUser = await User.findOne({'username': req.session.username})
