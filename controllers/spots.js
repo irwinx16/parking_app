@@ -101,13 +101,17 @@ router.put('/:id', async (req, res, next) => {
 		const foundUser = await User.findOne({'username': req.session.username})
 
 		// get spot from spots collection matching :id
-		// const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
+		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
 		foundUser.spots.id(req.params.id).spotname = req.body.spotname		
+
+		console.log("------ this is req.body in the put route")
+		console.log(req.body)
+		console.log("------ this is req.body in the put route")
 		// foundUser.spots.id(req.params.id).remove();
 		// foundUser.spots.push(updatedSpot);
 		foundUser.save((err, data) => {
-			res.redirect('/myspots/' + req.params.id)
+			res.redirect('/myspots/')
 			
 		});
 
@@ -138,20 +142,8 @@ router.get('/logout', (req, res) => {
 
 
 
-//ROUTE TO DELETE PAGE
 
-router.delete('/:id', async(req, res)  => {
-    try{
-    const deletedSpot = await Spot.findByIdAndRemove(req.params.id);
-    const foundUser = await User.findOne({'spots._id': req.params.id});
-        foundUser.spots.id(req.params.id).remove();
-        foundUser.save((err, data) => {
-            res.redirect('/myspots');
-        });
-    } catch(err) {
-        res.send(err)
-    }
-})
+
 
 
 

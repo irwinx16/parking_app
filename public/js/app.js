@@ -3,7 +3,7 @@ console.log("Connected");
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
-let zone = 0;
+let zone = 'No Zone Detected';
 
 
 
@@ -152,13 +152,22 @@ function findZone(streetNum) {
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-
       console.log(address);
-      $('#zone').val(zone)
+      // $('#zone').val(zone)
     } else {
 
       }
-      
 
     }
+
+    if(zone > 0){
+      $('#zone').val('Your Spot is in Zone ' + zone)
+      $('#returnZone').text('Your Spot is in Zone ' + zone)
+
+    } else {
+      $('#zone').val(zone)
+      $('#returnZone').text(zone)
+    }
+
 }
+
