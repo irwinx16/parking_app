@@ -145,6 +145,8 @@ function findZone(streetNum) {
 
 
     } else {
+      zone = 'No Zone'
+      $('#zone').val(zone)
       console.log('No Zone Detected');
 
     }
