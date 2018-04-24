@@ -23,9 +23,9 @@ router.get('/', (req, res) => {
 
 	res.send('LOGOUT')
 
-	// req.session.logged = false;
-	// req.session.message = "Succesful Logout."
-	// res.rerender('/');
+// 	// req.session.logged = false;
+// 	req.session.message = "Succesful Logout."
+// 	// res.rerender('/');
 })
 
 module.exports = router;

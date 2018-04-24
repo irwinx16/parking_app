@@ -32,11 +32,8 @@ router.get('/new', async (req, res) => {
 	//get users
 
 	try {
-
-		const allUsers = await User.find({})
-		res.render('spots/new.ejs', {
-			users: allUsers
-		})
+		const foundUser = await User.findOne({username: req.session.username})
+		res.render('spots/new.ejs')
 
 	} catch (err) {
 		res.send(err)
@@ -49,64 +46,21 @@ router.post('/', async (req, res) => {
 
 	try {
 
-		const foundUser = await User.findById(req.body.userId);
+		const foundUser = await User.findOne(req.session.userId)
 		const addedSpot = await Spot.create(req.body);
 
-		foundUser.spots.push(addedSpot);
-		foundUser.save((err, data) => {
-			res.redirect ('/myspots')
-		})
+		console.log(req.session.logged)
+		res.send(foundUser);
+
+		// foundUser.spots.push(addedSpot);
+		// foundUser.save((err, data) => {
+		// 	res.redirect ('/myspots')
+		// })
 	} catch (err) {
 		res.send(err)
 	}	
 
 });
-
-
-
-// EDIT PAGE 
-
-router.get('/:id/edit', async (req, res) => {
-
-	try {
-
-		const foundSpot = await Spot.findById(req.params.id)
-
-		console.log("---- this is found spot in the edit route")
-		console.log(foundSpot)
-		console.log("---- this is found spot in the edit route")
-
-		// console.log("------- this is req.body id/edit route") 
-		// console.log(req.body) // THIS RETURNS {}
-		// console.log("------- this is req.body id/edit route") 
-
-		// console.log(foundSpot) // THIS WORKS
-
-		const allUsers = await User.find({})
-
-		// console.log(allUsers) // THIS RETURNS NOTHING
-
-		const foundUserSpot = await User.findOne({'spots._id': req.params.id})
-
-		// console.log(foundUserSpot); // THIS RETURNS NULL 
-
-		console.log("------- this is req.body id/edit route") 
-		console.log(req.body) // THIS RETURNS {}
-		console.log("------- this is req.body id/edit route") 
-
-		res.render('spots/edit.ejs', {
-			spot: foundSpot,
-			users: allUsers,
-			UserSpot: foundUserSpot
-		})
-
-	} catch(err) {
-		res.send(err)
-	}
-
-
-})
-
 
 //ROUTE TO SHOW PAGE
 
@@ -168,28 +122,9 @@ router.put('/:id', async (req, res) => {
 
 
 
+
+
 //ROUTE TO DELETE PAGE
-
-router.delete('/:id', async(req, res)  => {
-	try{
-
-
-	const deletedSpot = await Spot.findByIdAndRemove(req.params.id);
-	const foundUser = await User.findOne({'spots._id': req.params.id});
-
-		foundUser.spots.id(req.params.id).remove();
-		foundUser.save((err, data) => {
-			res.redirect('/myspots');
-		});
-
-
-	} catch(err) {
-
-		res.send(err)
-	}
-})
-
-
 
 
 module.exports = router;

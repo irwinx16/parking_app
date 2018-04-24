@@ -10,11 +10,9 @@
 <body>
 	<h1> Check My Spot</h1>
 	<form action='/myspots' method='post'>
-		<select name='userId'>
-			<% for (let i = 0; i < users.length; i++) { -%>
-				<option value='<%= users[i].id%>'><%= users[i].username%></option>
-					<% } -%>
-		</select><br/>
+		<input type='text' name='spotname'></input>
+		<button type='submit'>Add Spot</button>
+
 	</form>
 	<br>
 
@@ -33,8 +31,7 @@
 <br> 
 <br>
 
-		<input type='text' name='spotname'></input>
-		<button type='submit'>Add Spot</button>
+
 
 
 

@@ -27,18 +27,12 @@ router.post('/login', async (req, res, next) => {
 				req.session.logged = true;
 				req.session.username = user.username; 
 
-				console.log('----------------------------------------')
-				console.log('USERS MATCH!')
-				console.log('----------------------------------------')
-
 				res.redirect('/home')
 
 			} else {
 
 				req.session.message = 'Username or Password Incorrect. Please Try Again.'
-				console.log('----------------------------------------')
-				console.log('USERNAMES DONT MATCH!')
-				console.log('----------------------------------------')
+		
 				res.redirect('/')
 
 
@@ -47,9 +41,7 @@ router.post('/login', async (req, res, next) => {
 		} else {
 		
 			req.session.message = "Username or Password Incorrect. Please Try Again."
-			console.log('----------------------------------------')
-			console.log('USER NULL!')
-			console.log('----------------------------------------')
+
 			res.redirect('/')
 		}
 

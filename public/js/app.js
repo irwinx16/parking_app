@@ -1,4 +1,3 @@
-
 console.log("Connected");
 
 //CONSTANT VARIABLES
@@ -16,7 +15,11 @@ $('a').on('click', (e) => {
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible')
 		}
-	} else if (e.currentTarget.innerText === 'Registration'){
+	} else if(e.currentTarget.innerText === 'Logout') {
+    console.log('Logout Clicked')
+  }
+
+   else if (e.currentTarget.innerText === 'Registration'){
 		if($('#registration').hasClass('invisible')){
 			$('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible');
@@ -25,6 +28,7 @@ $('a').on('click', (e) => {
 		}
 	}
 })
+
 
 //PUT THE MAP ON THE PAGE
 function initMap() {
