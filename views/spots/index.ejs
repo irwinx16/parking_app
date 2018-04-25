@@ -48,6 +48,8 @@
         <td><a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a></td>
         <td><%=spots[i].zone%></td>
         <td><%=spots[i].address%></td>
+
+
         <td><button class="btn btn-light"><a href="/myspots/<%= spots[i].id%>/edit">Edit Spot</a></button></td>
         <td>
            <form action="/myspots/<%= spots[i].id%>?_method=DELETE" method="POST">
@@ -62,13 +64,6 @@
     
 
    		<% } %>
-
-
-
-
-
-
-
 
 
 
