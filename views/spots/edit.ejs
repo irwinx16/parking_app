@@ -22,20 +22,45 @@
 
 </head>
 <body>
-	<h1 class="text-center">Edit your Spot</h1>
 
 
-	<form action="/myspots/<%= spot._id%>?_method=PUT" method="post">
+<div class="container">
+
+	<h1 class="text-center">Edit your Spot</h1><br>
+
+<ul class="list-inline text-center">
+
+	<li class="list-inline-item"><form action="/myspots/<%= spot._id%>?_method=PUT" method="post">
 
 		Spot Name: <input type="text" name="spotname" value="<%=spot.spotname%>"><br>
 
-		<button type="Submit">Update Spot</button> 
+	</li>
+
+		<button class="btn btn-light" type="Submit">Update Spot</button> 
 	</form>
 
 
-	<form action="/myspots/<%= spot.id%>?_method=DELETE" method="POST">
-		<button>delete</button>
+
+	<li class="list-inline-item"><form action="/myspots/<%= spot.id%>?_method=DELETE" method="POST">
+		<button class="btn btn-danger">Delete</button>
 	</form>
+	</li>
+</ul>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -23,13 +23,89 @@
 
 </head>
 <body>
-	<h1 class="text-center"> My Spots </h1>
+	<h1 class="text-center"> My Spots </h1><br>
 
-	<a href="/myspots/new">Add a Spot</a>
+  <div class="text-center"> 
+	<button class="btn btn-light">
+    <a href="/myspots/new">Add a Spot</a>
+  </button>
+  </div>
+  <br>
+
+
 		<% for(let i = 0; i <spots.length; i++) {%>
-			<li> 
-				<a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a>
-			</li>
-		<% } %>
+
+<table class="table">
+    <thead class="thead-light">
+      <tr>
+    <!--     <th scope="col">Spot Name</th>
+        <th scope="col">Zone</th>
+        <th scope="col">Address</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a></td>
+        <td><%=spots[i].zone%></td>
+        <td><%=spots[i].address%></td>
+        <td><button class="btn btn-light"><a href="/myspots/<%= spots[i].id%>/edit">Edit Spot</a></button></td>
+        <td>
+           <form action="/myspots/<%= spots[i].id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+            </form>
+            </td>
+      </tr>
+
+  </tbody>
+ </table>
+
+    
+
+   		<% } %>
+
+
+
+
+
+
+
+
+<!-- <table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+    </tr>
+  </tbody>
+</table>
+ -->
+
+
+
+
+
+
 </body>
 </html>
