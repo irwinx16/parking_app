@@ -6,8 +6,6 @@ const directionArray = [];
 let zone = 'No Zone Detected';
 
 
-
-
 //TOGGLE BETWEEN LOGIN & REGISTER
 $('a').on('click', (e) => {
 	console.log(e.currentTarget.innerText)
