@@ -47,7 +47,8 @@ function geocodeAddress(geocoder, resultsMap) {
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
   const address = (streetNum + ' ' + streetDir + ' ' + street + ', ' + city);
-  $('#address').val(address)
+  $('.address').val(address)
+
   geocoder.geocode({'address': address}, function(results, status) {
    
     if (status === 'OK') {

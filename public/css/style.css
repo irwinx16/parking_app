@@ -15,6 +15,14 @@ html, body {
   width: 75%;
 }
 
+.address {
+  display: none;
+}
+
+/*#zone {
+  display: none;
+}*/
+
 
 
 #floating-panel {
