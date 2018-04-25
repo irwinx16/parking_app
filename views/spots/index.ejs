@@ -2,9 +2,28 @@
 <html>
 <head>
 	<title>My Spots</title>
+
+	<nav class= "justify-content-center nav-fill">
+	<ul class="nav justify-content-center alert alert-light ">
+  <li class="nav-item">
+    <a class="nav-link active text-dark" href="/home">Home</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="/myspots/">My Spots</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-dark" href="/logout">Logout</a>
+  </li>
+</ul>
+</nav>
+
 </head>
 <body>
-	<h1> My Spots </h1>
+	<h1 class="text-center"> My Spots </h1>
+	
 	<a href="/myspots/new">Add a Spot</a>
 		<% for(let i = 0; i <spots.length; i++) {%>
 			<li> 

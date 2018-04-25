@@ -3,7 +3,7 @@ console.log("Connected");
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
-let zone = 0;
+let zone = 'No Zone Derected';
 
 
 
@@ -13,17 +13,18 @@ $('a').on('click', (e) => {
 	console.log(e.currentTarget.innerText)
 
 	if(e.currentTarget.innerText === 'Login') {
-		if($('#login').hasClass('invisible')){
-			$('#login').toggleClass('invisible')
+    if($('#login').hasClass('invisible')){
+      $('#login').toggleClass('invisible')
 			$('#registration').toggleClass('invisible')
 		}
+
 	} else if (e.currentTarget.innerText === 'Registration'){
-		if($('#registration').hasClass('invisible')){
-			$('#login').toggleClass('invisible')
-			$('#registration').toggleClass('invisible');
+      if($('#registration').hasClass('invisible')){
+			 $('#login').toggleClass('invisible')
+			 $('#registration').toggleClass('invisible');
       } else {
         console.log('do nothing')
-		  }
+		    }
 	} else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
     //   if(err){
     //     console.log("Uh Oh. That didn't work. Session Still Running.")
@@ -63,7 +64,7 @@ function geocodeAddress(geocoder, resultsMap) {
    
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
-      let marker = new google.maps.Marker({
+      const marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
@@ -110,8 +111,6 @@ function zoneAddress(geocoder, resultsMap) {
             } else {
               //This pushes all of the streets where objects ARE matches
               streetArray.push(data[i]);
-
-
             }
           }
           directionCheck(streetNum, streetDir);
@@ -154,11 +153,28 @@ function findZone(streetNum) {
       console.log(directionArray[i]);
 
       console.log(address);
-      $('#zone').val(zone)
+      // $('#zone').val(zone)
     } else {
 
       }
       
 
     }
+
+
+  if(zone > 0){
+    $('#zone').val('Your Spot is in Zone ' + zone)
+    $('#returnZone').text('Your Spot is in Zone ' + zone)
+   
+   } else {
+         $('#zone').val(zone)
+         $('#returnZone').text(zone)
+    }
+ 
 }
+ 
+
+
+
+
+
