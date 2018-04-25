@@ -1,31 +1,24 @@
 console.log("Connected");
-
 //CONSTANT VARIABLES
 const streetArray = [];
 const directionArray = [];
-let zone = 'No Zone Derected';
-
-
-
-
+let zone = 'No Zone Detected';
 //TOGGLE BETWEEN LOGIN & REGISTER
 $('a').on('click', (e) => {
-	console.log(e.currentTarget.innerText)
-
-	if(e.currentTarget.innerText === 'Login') {
+  console.log(e.currentTarget.innerText)
+  if(e.currentTarget.innerText === 'Login') {
     if($('#login').hasClass('invisible')){
       $('#login').toggleClass('invisible')
-			$('#registration').toggleClass('invisible')
-		}
-
-	} else if (e.currentTarget.innerText === 'Registration'){
-      if($('#registration').hasClass('invisible')){
-			 $('#login').toggleClass('invisible')
-			 $('#registration').toggleClass('invisible');
+      $('#registration').toggleClass('invisible')
+    }
+  } else if (e.currentTarget.innerText === 'Registration'){
+    if($('#registration').hasClass('invisible')){
+      $('#login').toggleClass('invisible')
+      $('#registration').toggleClass('invisible');
       } else {
         console.log('do nothing')
-		    }
-	} else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
+      }
+  } else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
     //   if(err){
     //     console.log("Uh Oh. That didn't work. Session Still Running.")
     //   } else {
@@ -33,11 +26,9 @@ $('a').on('click', (e) => {
     //     res.redirect('/')
     //   }
     // })
-
     console.log('Logout Clicked')
   }
 });
-
 //PUT THE MAP ON THE PAGE
 function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -47,7 +38,6 @@ function initMap() {
   const geocoder = new google.maps.Geocoder();
   document.getElementById('submit').addEventListener('click', function() {
     geocodeAddress(geocoder, map);
-
   });
 }
 //PUT A PIN ON THE MAP AT THE USER'S ADDRESS
@@ -57,9 +47,7 @@ function geocodeAddress(geocoder, resultsMap) {
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
   const address = (streetNum + ' ' + streetDir + ' ' + street + ', ' + city);
-
   $('#address').val(address)
-
   geocoder.geocode({'address': address}, function(results, status) {
    
     if (status === 'OK') {
@@ -68,8 +56,8 @@ function geocodeAddress(geocoder, resultsMap) {
         map: resultsMap,
         position: results[0].geometry.location
       });
-      // console.log(results[0]);
-      // zoneAddress(geocoder, resultsMap);
+      console.log(results[0]);
+      zoneAddress(geocoder, resultsMap);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -107,14 +95,12 @@ function zoneAddress(geocoder, resultsMap) {
             if (lowStreet.indexOf(lowAddress)) {
               //This displays all of the objects where the streets that are NOT matches
               // console.log('No Match')
-
             } else {
               //This pushes all of the streets where objects ARE matches
               streetArray.push(data[i]);
             }
           }
           directionCheck(streetNum, streetDir);
-
         }); 
     });
 }
@@ -129,52 +115,31 @@ function directionCheck (streetNum, streetDir) {
     if(chiDirection == userDirection){
       directionArray.push(streetArray[i]);
     } else {
-
     }
   }
-
   findZone(streetNum);
-
 }
 //FUNCTION TO IDENTIFY ZONE 
 function findZone(streetNum) {
   // console.log(streetNum);
   // console.log("Now we will find the zone!");
-
-
   for(let i = 0; i < directionArray.length; i++){
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
-
-
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-
       console.log(address);
-      $('#zone').val(zone)
+      // $('#zone').val(zone)
     } else {
-
       }
-      
-
     }
-
-
-  if(zone > 0){
-    $('#zone').val('Your Spot is in Zone ' + zone)
-    $('#returnZone').text('Your Spot is in Zone ' + zone)
-   
-   } else {
-         $('#zone').val(zone)
-         $('#returnZone').text(zone)
+    if(zone > 0){
+      $('#zone').val('Your Spot is in Zone ' + zone)
+      $('#returnZone').text('Your Spot is in Zone ' + zone)
+    } else {
+      $('#zone').val(zone)
+      $('#returnZone').text(zone)
     }
- 
 }
- 
-
-
-
-
-
