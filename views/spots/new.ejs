@@ -37,31 +37,30 @@
   <br>
 
   <div align="center">
-    <form action='/myspots' method='POST'>
+    <form action='/myspots' method='POST' style="display: inline">
 
     <input type='textbox' name='spotname' value='Spot Name'></input>  
 
-    <button type='submit'>Save Spot</button>  
+    <button type='submit' class="btn btn-light">Save Spot</button>  
 
-        <form action="http://maps.google.com/maps" method="get" target="_blank">
-      
-          <input type="text" class='address' name="saddr"/></input>
-          <input type="hidden" name="daddr" value="" />
-          <input type="submit" value="Get directions" />
-        </form> 
 
-    <input type="textbox" id="zone" name="zone" value='zone' class='invisible'/></input>
+    <input type="hidden" id="zone" name="zone" value='zone' /></input>
 
     <input type="textbox" class="address" name="address" value='address add' class=''/></input>
 
   </form>
 
+        <form action="http://maps.google.com/maps" method="get" target="_blank" style="display: inline">
+      
+          <input type="text" class='address' name="saddr"/></input>
+          <input type="hidden" name="daddr" value="" />
+          <button class="btn btn-light" type="submit" value="Get directions" />Get Direction</button>
+        </form> 
 </div>
 
 <br>
 <br>
 <br>
-  
   
 <script src="/js/app.js"></script>
 <script async defer
