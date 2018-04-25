@@ -33,9 +33,7 @@
   <br>
 
 
-		
-
-<table class="table">
+  <table class="table">
     <thead class="thead-light">
       <tr>
         <th scope='col'>Spot Name</th>
@@ -52,25 +50,13 @@
             <td><%=spots[i].zone%></td>
             <td><%=spots[i].address%></td>
             <td><button class="btn btn-light"><a href="/myspots/<%= spots[i].id%>/edit">Edit Spot</a></button></td>
-            <td><button class="btn btn-danger">Delete</button></td>
+            <td>           <form action="/myspots/<%= spots[i].id%>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete</button>
+            </form>
           </tr>
         <% } %>
   </tbody>
 </table>
-
-    
-
-   		
-
-
-
-
-
-
-
-
-
-
 
 
 
