@@ -153,7 +153,7 @@ function findZone(streetNum) {
       console.log(directionArray[i]);
 
       console.log(address);
-      // $('#zone').val(zone)
+      $('#zone').val(zone)
     } else {
 
       }

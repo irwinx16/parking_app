@@ -35,16 +35,19 @@
 </div>
 
 
-
 <div id="map"></div>
 <br> 
+
+<div id='returnZone'>
+     
+</div>
 <br>
 
 	<form action='/myspots' method='POST'>
-		<input type='textbox' name='spotname' value='spotname'> Spot Name </input>		
-		<input type="textbox" id="zone" name="zone" value='zone' /> Zone Number </input>
-		<input type="textbox" id="address" name="address" value='address' /> Address </input>
-		<button type='submit'>Add Spot</button>
+		<input type='textbox' name='spotname' value='spotname'> Spot Name </input>
+    <button type='submit'>Save Spot</button>
+		<input type="textbox" id="zone" name="zone" value='zone' class='invisible'/></input>
+    <input type="textbox" id="address" name="address" value='address' class='invisible'/></input>
 	</form>
 
 
