@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Parking Zone Chicago</title>
+	<title>Zone Finder Chicago</title>
 </head>
 <body>
 <div class="jumbotron jumbotron-fluid container-fluid">
   <div class="container">
-    <h1 class="display-4">Welcome to Parking Zone Chicago!</h1>
-    <p class="lead">Find out if your address require a permit zone number.</p>
+    <h1 class="display-4": white;'>Welcome Zone Finder Chicago!</h1>
+    <p class="lead">Find the zone associated with your address.</p>
 
 		<% if (message) { %>
 			<p style='background-color: transparent;'><%= message %> </p>
 		<%} -%>
 
+
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+    <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true" style="background-color: white">Login</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" id="registration-tab" data-toggle="tab" href="#registration" role="tab" aria-controls="registration" aria-selected="false">Registration</a>
+    <a class="nav-link" id="registration-tab" data-toggle="tab" href="#registration" role="tab" aria-controls="registration" aria-selected="false" style="background-color: white">Registration</a>
   </li>
 </ul>
 
@@ -35,6 +36,7 @@
 		<button type='submit'>REGISTER</button>
 	</form>
 	</div>
+
 </div>
 
 </body>
