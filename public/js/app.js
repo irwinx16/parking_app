@@ -1,3 +1,4 @@
+
 console.log("Connected");
 
 //CONSTANT VARIABLES
@@ -10,21 +11,21 @@ let zone = 'No Zone Detected';
 
 //TOGGLE BETWEEN LOGIN & REGISTER
 $('a').on('click', (e) => {
-	console.log(e.currentTarget.innerText)
+  console.log(e.currentTarget.innerText)
 
-	if(e.currentTarget.innerText === 'Login') {
-		if($('#login').hasClass('invisible')){
-			$('#login').toggleClass('invisible')
-			$('#registration').toggleClass('invisible')
-		}
-	} else if (e.currentTarget.innerText === 'Registration'){
-		if($('#registration').hasClass('invisible')){
-			$('#login').toggleClass('invisible')
-			$('#registration').toggleClass('invisible');
+  if(e.currentTarget.innerText === 'Login') {
+    if($('#login').hasClass('invisible')){
+      $('#login').toggleClass('invisible')
+      $('#registration').toggleClass('invisible')
+    }
+  } else if (e.currentTarget.innerText === 'Registration'){
+    if($('#registration').hasClass('invisible')){
+      $('#login').toggleClass('invisible')
+      $('#registration').toggleClass('invisible');
       } else {
         console.log('do nothing')
-		  }
-	} else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
+      }
+  } else if(e.currentTarget.innerText === 'Logout') {    // req.session.destroy((err) => {
     //   if(err){
     //     console.log("Uh Oh. That didn't work. Session Still Running.")
     //   } else {
@@ -63,12 +64,12 @@ function geocodeAddress(geocoder, resultsMap) {
    
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
-      let marker = new google.maps.Marker({
+      const marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
-      // console.log(results[0]);
-      // zoneAddress(geocoder, resultsMap);
+      console.log(results[0]);
+      zoneAddress(geocoder, resultsMap);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
@@ -170,4 +171,3 @@ function findZone(streetNum) {
     }
 
 }
-
