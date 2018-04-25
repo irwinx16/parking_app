@@ -131,8 +131,6 @@ function findZone(streetNum) {
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-      console.log(address);
-      // $('#zone').val(zone)
     } else {
       }
     }
