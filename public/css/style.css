@@ -1,6 +1,6 @@
 
 body {
-  background-color: #ADD8E6;
+  background-color: #addae6;
 }
 
 html, body {
@@ -43,5 +43,13 @@ html, body {
 
 .container-fluid {
   height: 100%;
-  background: url("https://images6.alphacoders.com/423/thumb-1920-423653.jpg") no-repeat center center;
+  background: url("https://images.alphacoders.com/771/771424.jpg") no-repeat center center;
+  color: white;
 }
+
+
+/*
+.display-4 {
+  color: gray;
+
+}*/
