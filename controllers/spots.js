@@ -133,11 +133,6 @@ router.get('/logout', (req, res) => {
 })
 
 
-
-
-
-
-
 //ROUTE TO DELETE PAGE
 
 router.delete('/:id', async(req, res)  => {
