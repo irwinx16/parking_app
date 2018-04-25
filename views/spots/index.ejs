@@ -33,35 +33,34 @@
   <br>
 
 
-		<% for(let i = 0; i <spots.length; i++) {%>
+		
 
 <table class="table">
     <thead class="thead-light">
       <tr>
-    <!--     <th scope="col">Spot Name</th>
-        <th scope="col">Zone</th>
-        <th scope="col">Address</th> -->
+        <th scope='col'>Spot Name</th>
+        <th scope='col'>Zone</th>
+        <th scope='col'>Address</th>
+        <th scope='col'>Edit</th>
+        <th scope='col'>Delete</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td><a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a></td>
-        <td><%=spots[i].zone%></td>
-        <td><%=spots[i].address%></td>
-        <td><button class="btn btn-light"><a href="/myspots/<%= spots[i].id%>/edit">Edit Spot</a></button></td>
-        <td>
-           <form action="/myspots/<%= spots[i].id%>?_method=DELETE" method="POST">
-            <button class="btn btn-danger">Delete</button>
-            </form>
-            </td>
-      </tr>
-
+        <% for(let i = 0; i <spots.length; i++) {%>
+          <tr>
+            <td><a href="/myspots/<%=spots[i].id%>"><%=spots[i].spotname%></a></td>
+            <td><%=spots[i].zone%></td>
+            <td><%=spots[i].address%></td>
+            <td><button class="btn btn-light"><a href="/myspots/<%= spots[i].id%>/edit">Edit Spot</a></button></td>
+            <td><button class="btn btn-danger">Delete</button></td>
+          </tr>
+        <% } %>
   </tbody>
- </table>
+</table>
 
     
 
-   		<% } %>
+   		
 
 
 
