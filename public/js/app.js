@@ -32,7 +32,7 @@ $('a').on('click', (e) => {
 //PUT THE MAP ON THE PAGE
 function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 11,
+    zoom: 10,
     center: {lat: 41.8781, lng: -87.6298}
   });
   const geocoder = new google.maps.Geocoder();
@@ -53,6 +53,7 @@ function geocodeAddress(geocoder, resultsMap) {
    
     if (status === 'OK') {
       resultsMap.setCenter(results[0].geometry.location);
+      resultsMap.setZoom(17);
       const marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
@@ -131,13 +132,12 @@ function findZone(streetNum) {
       zone = directionArray[i].zone
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
-      // $('#zone').val(zone)
     } else {
       }
     }
     if(zone > 0){
       $('#zone').val('Your Spot is in Zone ' + zone)
-      $('#returnZone').text('Your Spot is in Zone ' + zone)
+      $('#returnZone').text('The address you provided is in zone ' + zone + '.  Please check parking restrictions.')
     } else {
       $('#zone').val(zone)
       $('#returnZone').text(zone)

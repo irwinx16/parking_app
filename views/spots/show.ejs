@@ -22,18 +22,39 @@
 	</nav>
 
 
-
 </head>
-<body>
-<h1><%= spot.spotname %> Show Page</h1>
-	<h3>Name: <%= spot.spotname %></h3>
-	<h3>Address: <%= spot.address%>
-	<h3>Zone: <%= spot.zone%></h3>
+
+
+<body><br>
+
+<div class="text-center">
+	<h1>Spot Information</h1> <br>
+
+	<h4><%= spot.spotname %></h4>
+	<h4><%= spot.address%>
+	<h4><%= spot.zone%></h4>
+
+<br>
+
+
+	<form action="http://maps.google.com/maps" method="get" target="_blank">
+    <input type="text" class='address' name="saddr"/></input>
+    <input type="hidden" name="daddr" value="<%=spot.address%>" />
+    <input class="btn btn-light" type="submit" value="Get directions" />
+	 </form>
 
 
 
 
-<button><a href="/myspots/<%= spot.id%>/edit">Edit Spot</a></button>
+<br><button class="btn btn-light"><a href="/myspots/<%= spot.id%>/edit">Edit Spot</a></button>
+
+
+
+</div>
+
+
+
+
 
 
 
