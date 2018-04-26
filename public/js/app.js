@@ -152,8 +152,8 @@ function findZone(streetNum) {
       $('#returnZone').text(zone)
     }
 }
-$('#main').velocity("fadeIn", { duration: 3000 });
+$('#flag').velocity("fadeIn", { duration: 3000 });
 
-// $("#main")
+// $("#flag")
 //     .velocity({ width: 100 }, 3000)
 //     .velocity({ height: 100 }, 1250);

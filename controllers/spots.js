@@ -5,72 +5,27 @@ const Spot = require('../models/spots.js')
 
 //ROUTE TO MY SPOTS INDEX
 
-// router.get('/', async (req,res) => {
-
-// 	try {
-
-// 		const foundUser = await User.findOne({'username': req.session.username})
-// 		const spots = foundUser.spots
-
-// 		res.render('spots/index.ejs', {
-// 			spots: spots
-// 		})
-
-// 	} catch (err) {
-
-// 		res.send(err)
-// 	}
-
-
-// });
-
-
-
-
-router.get('/',  (req,res) => {
-
-	// try {
-
-		// queryForStuff is similar to a promise becauseyou can chain .then onto it
-		const queryForStuff = User.findOne({'username': req.session.username})
-
-		// this is a Mongoose Query object
-		console.log(queryForStuff)
-
-		// this is a promise
-		const myPromise = queryForStuff.exec()
-
-		console.log("here is the promise: ----------------", myPromise)
-
-		myPromise.then(function(data) {
-			console.log("data", data); 
-			res.render('spots/index.ejs', {
-				spots: data.spots
-			})
-		}).catch(err=>{console.log("err", err); res.send('error', err) })
-		// const spots = foundUser.spots
-
-// 
-	// } catch (err) {
-
-		// res.send(err)
-	// }
-
+router.get('/', async (req,res) => {
+	try {
+		const foundUser = await User.findOne({'username': req.session.username})
+		const spots = foundUser.spots
+		res.render('spots/index.ejs', {
+			spots: spots
+		})
+	} catch (err) {
+		res.send(err)
+	}
 });
 
 
 //ROUTE TO GET USERS 
 
 router.get('/new', async (req, res) => {
-
-	//get users
-
 	try {
 		const foundUser = await User.findOne({username: req.session.username})
 		res.render('spots/new.ejs',{
 			message: req.session.message
 		})
-
 	} catch (err) {
 		res.send(err)
 	}
@@ -81,7 +36,6 @@ router.get('/new', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        
         const foundUser = await User.findOne({'username': req.session.username})
         const addedSpot = await Spot.create(req.body);
         foundUser.spots.push(addedSpot);
@@ -96,17 +50,13 @@ router.post('/', async (req, res) => {
 //ROUTE TO SHOW PAGE
 
 router.get('/:id', async (req, res) => {
-		
 	try {
-
 		const foundSpot = await Spot.findById(req.params.id)
 		const foundUser = await User.findOne({'spots._id': req.params.id})
-		
 		res.render('spots/show.ejs', {
 			spot: foundSpot, 
 			user: foundUser 
 		})
-
 	} catch (err) {
 		res.send(err)
 	}
@@ -132,23 +82,13 @@ router.get('/:id/edit', async (req, res) => {
 
 router.put('/:id', async (req, res, next) => {
 	try {
-		// get user from session
 		const foundUser = await User.findOne({'username': req.session.username})
-
-		// get spot from spots collection matching :id
 		const updatedSpot = await Spot.findByIdAndUpdate(req.params.id, req.body, {new: true});
 
 		foundUser.spots.id(req.params.id).spotname = req.body.spotname		
-		// foundUser.spots.id(req.params.id).remove();
-		// foundUser.spots.push(updatedSpot);
 		foundUser.save((err, data) => {
 			res.redirect('/myspots/')
-			
 		});
-
-		// res.send(updatedSpot)
-		// res.redirect('/myspots')
-
 	} catch (err) {
 		next(err);
 	}
