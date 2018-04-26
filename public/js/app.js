@@ -50,6 +50,8 @@ function initMap() {
     } 
   });
 }
+
+
 //PUT A PIN ON THE MAP AT THE USER'S ADDRESS
 function geocodeAddress(geocoder, resultsMap) {
   //Grab user input and format it in a way that can be run against the chicago API
@@ -65,29 +67,34 @@ function geocodeAddress(geocoder, resultsMap) {
    
     //status is 'OK' when no errors occurred. Address was succesfully parsed and at least one geocode was returned. 
     if (status === 'OK') {
-      //
+      //set specifications on how to display the map after user has clicked search
       resultsMap.setCenter(results[0].geometry.location);
       resultsMap.setZoom(17);
       const marker = new google.maps.Marker({
         map: resultsMap,
         position: results[0].geometry.location
       });
+      // allow user to see entire geocoded address in the console
       console.log(results[0]);
+      // call function to run the address through the Chicago Parking API
       zoneAddress(geocoder, resultsMap);
     } else {
       alert('Geocode was not successful for the following reason: ' + status);
     }
   });
 }
+
+
 //RUN ADDRESS THROUGH CHICAGO PARKING API
 function zoneAddress(geocoder, resultsMap) {
-  
+  //Grab user input and format it in a way that can be run against the chicago API
   const streetNum = document.getElementById('streetNum').value;
   const streetDir = document.getElementById('streetDir').value;
   const street = document.getElementById('street').value;
   const city = document.getElementById('city').value;
   const address = (streetNum + ' ' + streetDir + ' ' + street + ' ' + city);
   
+  //AJAX Request to Chicago Parking + Function to find all results that match user streetname
   geocoder.geocode({'address': address}, function(results, status) {
     $.ajax({
       url: "https://data.cityofchicago.org/resource/ys7w-i4tk.json",
@@ -97,58 +104,60 @@ function zoneAddress(geocoder, resultsMap) {
        "$$app_token" : "5c3YpZQAnB9JU1TCIMCuysdnK"
       }
     }).done(function(data) {
-      //SPLIT ADDRESS INTO ARRAY OF STRINGS
-      const addressSplit = address.split(' ')
-      // console.log(addressSplit);
-      //LOOP THROUGH THE DATA IN THE CHI PARKING API
+      //Loop through the data in the chicago parking API
       for (let i = 0; i < data.length; i++){
-        //FIND STREET NAME IN PARKING API & MAKE IT LOWERCASE
+        //Grab the street name from each object
         const findStreet = data[i].street_name;
+        //Make both user input and street name from API lowercase/compatible with one another
         const lowStreet = findStreet.toLowerCase();
-        //MAKE STRING FROM ADDRESS LOWERCASE
         const lowAddress = street.toLowerCase();
-        //LOOK FOR STREET NAME WITHIN CHICAGO LIST
+        //Look for a match between street names
         if (lowStreet.indexOf(lowAddress)) {
-          //This displays all of the objects where the streets that are NOT matches
-          // console.log('No Match')
         } else {
-          //This pushes all of the streets where objects ARE matches
+          //This pushes all of the streets where objects ARE matches into the streetArray
           streetArray.push(data[i]);
         }
       }
+      //Call function to check street directions
       directionCheck(streetNum, streetDir);
     }); 
   });
 }
+
+
 //FUNCTION TO FILTER BY STREET DIRECTION
 function directionCheck (streetNum, streetDir) {
+  //Take the first letter of the user's input in the direction field and make it lowercase
   const userDirection = streetDir.toLowerCase().charAt(0);
-
+  //Loop through the matched streets and find those that have matching street directions
   for(let i = 0; i < streetArray.length; i++){
+    //Make the direction lowercase/compatible with userDirection
     let chiDirection = streetArray[i].street_direction.toLowerCase();
-    // console.log(streetArray[i]);
-    // console.log("User Direction " + userDirection);
-    // console.log("Chicago Direction " + chiDirection);
+    //If the directions match, push into a direction array
     if(chiDirection == userDirection){
       directionArray.push(streetArray[i]);
     }
   }
+  //Call function to check address number
   findZone(streetNum);
 }
 //FUNCTION TO IDENTIFY ZONE 
 function findZone(streetNum) {
-  // console.log(streetNum);
-  // console.log("Now we will find the zone!");
+  //Loop through the addresses that match user direction
   for(let i = 0; i < directionArray.length; i++){
+    //Identify the limits of each zone
     let lowerLimit = directionArray[i].address_range_low;
     let upperLimit = directionArray[i].address_range_high;
+    //Check to see if user number falls within the zone
     if ((streetNum >= lowerLimit) && (streetNum <= upperLimit)){
       zone = directionArray[i].zone
+      //User can see the zone and specific chicago API object that corresponds with their address
       console.log('Zone is ' + zone)
       console.log(directionArray[i]);
     } else {
       }
     }
+    // If there isn't a zone --> tell the user
     if(zone > 0){
       $('#zone').val('Zone ' + zone)
       $('#returnZone').text('The address you provided is in zone ' + zone + '.  Please check parking restrictions.')
@@ -157,6 +166,11 @@ function findZone(streetNum) {
       $('#returnZone').text(zone)
     }
 }
+
+
+
+//--------ANIMATION FOR THE CHICAGO FLAG-------//
+
 $('#flag').velocity("fadeIn", { duration: 3000 });
 
 // $("#flag")
