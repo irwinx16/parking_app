@@ -49,21 +49,30 @@
           geocodeAddress(geocoder, map);
         });
       }
+var overlay;
+USGSOverlay.prototype = new google.maps.OverlayView();
 
-      function geocodeAddress(geocoder, resultsMap) {
-        const address = document.getElementById('address').value;
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status === 'OK') {
-            resultsMap.setCenter(results[0].geometry.location);
-            const marker = new google.maps.Marker({
-              map: resultsMap,
-              position: results[0].geometry.location
-            });
-          } else {
-            alert('Geocode was not successful for the following reason: ' + status);
-          }
-        });
-      }
+// Initialize the map and the custom overlay.
+
+function initMap() {
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 11,
+    center: {lat: 62.323907, lng: -150.109291},
+    mapTypeId: 'satellite'
+  });
+
+  var bounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(62.281819, -150.287132),
+      new google.maps.LatLng(62.400471, -150.005608));
+
+  // The photograph is courtesy of the U.S. Geological Survey.
+  var srcImage = 'https://developers.google.com/maps/documentation/' +
+      'javascript/examples/full/images/talkeetna.png';
+
+  // The custom USGSOverlay object contains the USGS image,
+  // the bounds of the image, and a reference to the map.
+  overlay = new USGSOverlay(bounds, srcImage, map);
+}
     </script>
     
     <script async defer

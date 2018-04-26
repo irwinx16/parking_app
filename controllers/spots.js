@@ -5,24 +5,60 @@ const Spot = require('../models/spots.js')
 
 //ROUTE TO MY SPOTS INDEX
 
-router.get('/', async (req,res) => {
+// router.get('/', async (req,res) => {
 
-	try {
+// 	try {
 
-		const foundUser = await User.findOne({'username': req.session.username})
-		const spots = foundUser.spots
+// 		const foundUser = await User.findOne({'username': req.session.username})
+// 		const spots = foundUser.spots
 
-		res.render('spots/index.ejs', {
-			spots: spots
-		})
+// 		res.render('spots/index.ejs', {
+// 			spots: spots
+// 		})
 
-	} catch (err) {
+// 	} catch (err) {
 
-		res.send(err)
-	}
+// 		res.send(err)
+// 	}
+
+
+// });
+
+
+
+
+router.get('/',  (req,res) => {
+
+	// try {
+
+		// queryForStuff is similar to a promise becauseyou can chain .then onto it
+		const queryForStuff = User.findOne({'username': req.session.username})
+
+		// this is a Mongoose Query object
+		console.log(queryForStuff)
+
+		// this is a promise
+		const myPromise = queryForStuff.exec()
+
+		console.log("here is the promise: ----------------", myPromise)
+
+		myPromise.then(function(data) {
+			console.log("data", data); 
+			res.render('spots/index.ejs', {
+				spots: data.spots
+			})
+		}).catch(err=>{console.log("err", err); res.send('error', err) })
+		// const spots = foundUser.spots
+
+// 
+	// } catch (err) {
+
+		// res.send(err)
+	// }
 
 
 });
+
 
 //ROUTE TO GET USERS 
 
