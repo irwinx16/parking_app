@@ -5,7 +5,6 @@ font-family: 'Ubuntu', sans-serif;
 
 
 body {
-
   background: linear-gradient(#fefefe, #99c2ff);
 }
 
@@ -79,6 +78,7 @@ h1 {
 
 .nav-item:hover{
  font-size: 120%;
+
 }
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Edit</title>
 	<nav class= "justify-content-center nav-fill">
 		<ul class="nav justify-content-center alert alert-light ">
 			<li class="nav-item">
@@ -18,7 +18,6 @@
 	  		</li>
 		</ul>
 	</nav>
-
 </head>
 <body>
 	<div class="container">
@@ -27,7 +26,7 @@
 		<ul class="list-inline text-center">
 			<li class="list-inline-item">
 				<form action="/myspots/<%= spot._id%>?_method=PUT" method="post">Spot Name: <input type="text" name="spotname" value="<%=spot.spotname%>">
-					<br>
+			<br>
 			</li>
 			<button class="btn btn-light" type="Submit">Update Spot</button> 
 				</form>
@@ -38,19 +37,6 @@
 			</li>
 		</ul>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 </html>
