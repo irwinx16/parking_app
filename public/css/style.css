@@ -1,21 +1,16 @@
 *{
-
-}
-
-
-body {
-  background-color: #addae6;
 }
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  background: linear-gradient(#fefefe, #99c2ff);
 
 }
 
 #map {
-  height: 50%;
+  height: 47.5%;
   width: 75%;
   margin: 0 170px;
  }
