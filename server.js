@@ -28,8 +28,6 @@ app.use(methodOverride('_method'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
-
-
 //--------------CONTROLLERS--------------//
 const loginController = require('./controllers/login')
 app.use('/', loginController);
@@ -37,9 +35,6 @@ const homeController = require('./controllers/home');
 app.use('/home', homeController);
 const spotController = require('./controllers/spots');
 app.use('/myspots', spotController);
-
-
-
 
 app.listen(3000, () => {
 	console.log("Server is listening on Port: " + PORT)

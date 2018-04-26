@@ -6,14 +6,12 @@ font-family: 'Ubuntu', sans-serif;
 body {
 
   background: linear-gradient(#fefefe, #99c2ff);
-
 }
 
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-
 }
 
 h1 {
@@ -26,7 +24,7 @@ h1 {
 
 
 #map {
-  height: 50%;
+  height: 47.5%;
   width: 75%;
   margin: 0 170px;
  }

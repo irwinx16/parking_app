@@ -19,16 +19,19 @@
       </li>
     </ul>
     </nav>
+    <br>
+    <br>
 </head>
 <body>
   <h1 class="text-center";">Look Up Zone!</h1>
 <br>
+
   <div id="floating-panel">
     <input id="streetNum" type="textbox" class="ghost-button" placeholder="Street Number" required>
     <input id="streetDir" type="textbox" class="ghost-button" placeholder="Street Direction">
     <input id="street" type="textbox" class="ghost-button" placeholder="Street Name">
-    <input id="city" type="textbox"  class="ghost-button" value="Chicago, IL">
-    <input id="submit" type="button" placeholder="Geocode" value="Search">
+    <input id="city" type="hidden"  class="ghost-button" value="Chicago, IL">
+    <button id="submit" type="button" class='btn btn-light' placeholder="Geocode" value="Search">Search</button>
   </div>
   <div id="map"></div>
   <br> 
