@@ -29,4 +29,4 @@ Users will be able to find parking permit zone information related to a specific
 ## APIS
 1. https://data.cityofchicago.org/Transportation/Parking-Permit-Zones/u9xt-hiju
 2. https://developers.google.com/maps/documentation/geocoding/start
-4. https://developers.google.com/maps/documentation/directions/intro
+3. https://developers.google.com/maps/documentation/directions/intro

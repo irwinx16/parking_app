@@ -11,15 +11,15 @@ $('a').on('click', (e) => {
   console.log(e.currentTarget.innerText)
   //When user clicks 'Login', toggle login elements to be visible and hide registration elements. 
   if(e.currentTarget.innerText === 'Login') {
-    if($('#login').hasClass('invisible')){
-      $('#login').toggleClass('invisible')
-      $('#registration').toggleClass('invisible')
+    if($('#login').hasClass('invisible2')){
+      $('#login').toggleClass('invisible2')
+      $('#registration').toggleClass('invisible2')
     }
   //When we click 'Registration', toggle registration elements tob e visible and hide login elements. 
   } else if (e.currentTarget.innerText === 'Registration'){
-    if($('#registration').hasClass('invisible')){
-      $('#login').toggleClass('invisible')
-      $('#registration').toggleClass('invisible');
+    if($('#registration').hasClass('invisible2')){
+      $('#login').toggleClass('invisible2')
+      $('#registration').toggleClass('invisible2');
       } else {
         console.log('do nothing')
       }
@@ -43,6 +43,11 @@ function initMap() {
   document.getElementById('submit').addEventListener('click', function() {
     //Call the geocodeAddres function
     geocodeAddress(geocoder, map);
+  });
+  document.getElementById('street').addEventListener('keypress', (event) => {
+    if(event.keyCode=="13") {
+      geocodeAddress(geocoder, map);
+    } 
   });
 }
 //PUT A PIN ON THE MAP AT THE USER'S ADDRESS
