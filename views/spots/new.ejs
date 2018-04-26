@@ -1,70 +1,62 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <title> New Spot</title>
+  
     <nav class= "justify-content-center nav-fill">
-      <ul class="nav justify-content-center alert alert-light ">
-      <li class="nav-item">
-        <a class="nav-link active text-dark" href="/home">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="/myspots/">My Spots</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link text-dark" href="#">Logout</a>
-      </li>
-    </ul>
+        <ul class="nav justify-content-center alert alert-light ">
+            <li class="nav-item">
+                <a class="nav-link active text-dark" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/myspots/">My Spots</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/logout">Logout</a>
+            </li>
+        </ul>
     </nav>
+    <br>
+    <br>
 </head>
 <body>
-  <h1 style="text-align:center";">Look Up Zone!</h1>
+    <h1 class="text-center";">Look Up Zone!</h1>
 <br>
-  <div id="floating-panel">
-    <input id="streetNum" type="textbox" class="ghost-button" placeholder="Street Number" required>
-    <input id="streetDir" type="textbox" class="ghost-button" placeholder="Street Direction">
-    <input id="street" type="textbox" class="ghost-button" placeholder="Street Name">
-    <input id="city" type="textbox"  class="ghost-button" value="Chicago, IL">
-    <input id="submit" type="button" placeholder="Geocode" value="Search">
-  </div>
-  <div id="map"></div>
-  <br> 
-  <div id='returnZone'>
-    
-  </div>
-  <br>
-
-
-  <div align="center">
-    <form action='/myspots' method='POST' style="display: inline">
-
-    <input type='textbox' name='spotname' value='Spot Name'></input>  
-
-    <button type='submit' class="btn btn-light">Save Spot</button>  
-
-
-    <input type="hidden" id="zone" name="zone" value='zone' /></input>
-
-    <input type="textbox" class="address" name="address" value='address add' class=''/></input>
-
-  </form>
-
-        <form action="http://maps.google.com/maps" method="get" target="_blank" style="display: inline">
-      
-          <input type="text" class='address' name="saddr"/></input>
-          <input type="hidden" name="daddr" value="" />
-          <button class="btn btn-light" type="submit" value="Get directions" />Get Direction</button>
+    <div id="floating-panel">
+        <input id="streetNum" type="textbox" class="ghost-button" placeholder="Street Number" required>
+        <input id="streetDir" type="textbox" class="ghost-button" placeholder="Street Direction">
+        <input id="street" type="textbox" class="ghost-button" placeholder="Street Name">
+        <input id="city" type="hidden"  class="ghost-button" value="Chicago, IL">
+        <button id="submit" type="button" class='btn btn-light' placeholder="Geocode" value="Search">Search</button>
+    </div>
+    <div id="map"></div>
+    <br> 
+    <div id='returnZone'>
+    </div>
+    <div align="center" id="newPage">
+        <form action='/myspots' method='POST'>
+            <input type='textbox' name='spotname' value='Spot Name'></input>  
+            <button type='submit' class="btn btn-light">Save Spot</button>  
+            <input type="hidden" id="zone" name="zone" value='zone' /></input>
+            <input type="textbox" class="address" name="address" value='address add' class=''/></input>
+        </form>
+        <form action="http://maps.google.com/maps" method="get" target="_blank">
+            <input type="text" class='address' name="saddr"/></input>
+            <input type="hidden" name="daddr" value="" />
+            <br>
+            <button class="btn btn-light" type="submit" value="Get directions" />Get Directions</button>
         </form> 
-</div>
-
-<br>
-<br>
-<br>
-  
+    </div>
+    <br>
+    <br>
+    <br>   
 <script src="/js/app.js"></script>
 <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDN0v5gmBHb6x5gLO0XlH7k8iYfsoc7Y1Q&callback=initMap">
+        
+</script>
 </body>
 </html>

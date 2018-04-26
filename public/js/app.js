@@ -33,7 +33,7 @@ $('a').on('click', (e) => {
 function initMap() {
   // Create a new map --> google.maps function. Zoom and center are ALWAYS required parameters.
   const map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 10,
+    zoom: 11,
     center: {lat: 41.8781, lng: -87.6298}
   });
 
@@ -118,6 +118,7 @@ function zoneAddress(geocoder, resultsMap) {
 //FUNCTION TO FILTER BY STREET DIRECTION
 function directionCheck (streetNum, streetDir) {
   const userDirection = streetDir.toLowerCase().charAt(0);
+
   for(let i = 0; i < streetArray.length; i++){
     let chiDirection = streetArray[i].street_direction.toLowerCase();
     // console.log(streetArray[i]);
@@ -125,7 +126,6 @@ function directionCheck (streetNum, streetDir) {
     // console.log("Chicago Direction " + chiDirection);
     if(chiDirection == userDirection){
       directionArray.push(streetArray[i]);
-    } else {
     }
   }
   findZone(streetNum);
@@ -145,10 +145,15 @@ function findZone(streetNum) {
       }
     }
     if(zone > 0){
-      $('#zone').val('Your Spot is in Zone ' + zone)
+      $('#zone').val('Zone ' + zone)
       $('#returnZone').text('The address you provided is in zone ' + zone + '.  Please check parking restrictions.')
     } else {
       $('#zone').val(zone)
       $('#returnZone').text(zone)
     }
 }
+$('#main').velocity("fadeIn", { duration: 3000 });
+
+// $("#main")
+//     .velocity({ width: 100 }, 3000)
+//     .velocity({ height: 100 }, 1250);

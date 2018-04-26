@@ -2,67 +2,41 @@
 <html>
 <head>
 	<title> Spot Show Page</title>
-
+	 
 
 	<nav class= "justify-content-center nav-fill">
 		<ul class="nav justify-content-center alert alert-light ">
-	  <li class="nav-item">
-	    <a class="nav-link active text-dark" href="/home">Home</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link text-dark" href="/myspots/new">New Spot</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link text-dark" href="/myspots/">My Spots</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link text-dark" href="/logout">Logout</a>
-	  </li>
-	</ul>
+			<li class="nav-item">
+	    		<a class="nav-link active text-dark" href="/home">Home</a>
+	 		</li>
+	  		<li class="nav-item">
+	    		<a class="nav-link text-dark" href="/myspots/new">New Spot</a>
+	  		</li>
+	  		<li class="nav-item">
+	    		<a class="nav-link text-dark" href="/myspots/">My Spots</a>
+	  		</li>
+	  		<li class="nav-item">
+	    		<a class="nav-link text-dark" href="/logout">Logout</a>
+	  		</li>
+		</ul>
 	</nav>
-
-
 </head>
-
-
 <body><br>
+	<div class="text-center">
 
-<div class="text-center">
-	<h1>Spot Information</h1> <br>
-
-	<h4><%= spot.spotname %></h4>
-	<h4><%= spot.address%>
-	<h4><%= spot.zone%></h4>
-
-<br>
-
-
-	<form action="http://maps.google.com/maps" method="get" target="_blank">
-    <input type="text" class='address' name="saddr"/></input>
-    <input type="hidden" name="daddr" value="<%=spot.address%>" />
-    <input class="btn btn-light" type="submit" value="Get directions" />
-	 </form>
-
-
-
-
-<br><button class="btn btn-light"><a href="/myspots/<%= spot.id%>/edit">Edit Spot</a></button>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+		<h1>Spot Information</h1>
+		<br>
+		<h4><%= spot.spotname %></h4>
+		<h4><%= spot.address%>
+		<h4><%= spot.zone%></h4>
+		<br>
+		<form action="http://maps.google.com/maps" method="get" target="_blank">
+	    <input type="text" class='address' name="saddr"/></input>
+	    <input type="hidden" name="daddr" value="<%=spot.address%>" />
+	    <input class="btn btn-light" type="submit" value="Get directions" />
+		</form>
+		<br>
+		<button class="btn btn-light"><a href="/myspots/<%= spot.id%>/edit">Edit Spot</a></button>
+	</div>
 </body>
 </html>
