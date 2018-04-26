@@ -21,7 +21,6 @@ router.get('/', async (req,res) => {
 		res.send(err)
 	}
 
-
 });
 
 //ROUTE TO GET USERS 

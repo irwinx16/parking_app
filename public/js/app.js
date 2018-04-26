@@ -136,7 +136,7 @@ function findZone(streetNum) {
       }
     }
     if(zone > 0){
-      $('#zone').val('Your Spot is in Zone ' + zone)
+      $('#zone').val('Zone ' + zone)
       $('#returnZone').text('The address you provided is in zone ' + zone + '.  Please check parking restrictions.')
     } else {
       $('#zone').val(zone)
