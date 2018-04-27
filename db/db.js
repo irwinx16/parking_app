@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 //would add the port to the connectionString if we weren't operating on the default port
-const connectionString = process.env.DB_HOST
+const connectionString = process.env.MONGODB_URI
 
 mongoose.connect(connectionString);
 
