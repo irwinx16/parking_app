@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express ();
 const bodyParser = require('body-parser');
@@ -36,6 +37,6 @@ app.use('/home', homeController);
 const spotController = require('./controllers/spots');
 app.use('/myspots', spotController);
 
-app.listen(3000, () => {
+app.listen(process.env.PORT || PORT, () => {
 	console.log("Server is listening on Port: " + PORT)
 });
